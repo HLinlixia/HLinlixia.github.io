@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>搭建个人博客</title>
+    <url>/2024/07/12/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>Hexo 是一个快速、简单且强大的静态网站生成器，使用Node.js构建。它特别适合用于创建博客网站。通过使用Markdown文件来编写内容，Hexo可以将这些内容转换成静态HTML文件，适合部署在各种静态网站托管服务上，如GitHub Pages。</p>
+<h2 id="1-安装Node-js和npm"><a href="#1-安装Node-js和npm" class="headerlink" title="1. 安装Node.js和npm"></a>1. 安装Node.js和npm</h2><p>Hexo 依赖 Node.js 和 npm。你可以通过以下命令来安装它们：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install nodejs npm</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="2. 安装Hexo"></a>2. 安装Hexo</h2><p>使用 npm 全局安装 Hexo 命令行工具：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-初始化Hexo项目"><a href="#3-初始化Hexo项目" class="headerlink" title="3. 初始化Hexo项目"></a>3. 初始化Hexo项目</h2><p>在你希望创建博客的目录下初始化一个新的 Hexo 项目：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-配置-Hexo"><a href="#4-配置-Hexo" class="headerlink" title="4. 配置 Hexo"></a>4. 配置 Hexo</h2><p>打开 <code>blog</code> 目录中的 <code>_config.yml</code> 文件，这个文件包含了网站的主要配置。可以根据需要修改以下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">My</span> <span class="string">Blog</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Your</span> <span class="string">Name</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-创建新文章"><a href="#5-创建新文章" class="headerlink" title="5. 创建新文章"></a>5. 创建新文章</h2><p>使用 Hexo 命令创建一篇新文章：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo new <span class="string">&quot;My First Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这将在 <code>source/_posts/</code> 目录下创建一个新的 Markdown 文件，可以在其中编写文章内容。</p>
+<h2 id="6-生成静态文件"><a href="#6-生成静态文件" class="headerlink" title="6. 生成静态文件"></a>6. 生成静态文件</h2><p>使用以下命令生成静态文件：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>这将在 <code>public</code> 目录中生成静态文件。</p>
+<h2 id="7-本地预览"><a href="#7-本地预览" class="headerlink" title="7. 本地预览"></a>7. 本地预览</h2><p>使用以下命令启动本地服务器以预览网站：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，网站可以在浏览器中通过 <code>http://localhost:4000</code> 访问。</p>
+<h2 id="8-选择和安装主题"><a href="#8-选择和安装主题" class="headerlink" title="8. 选择和安装主题"></a>8. 选择和安装主题</h2><p>Hexo 默认提供的主题比较简单，可以选择更丰富的主题。例如安装 NexT 主题：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>_config.yml</code> 文件中修改主题配置：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+
+<p>根据需要配置主题文件，主题的配置文件通常位于 <code>themes/next/_config.yml</code>。</p>
+<h2 id="9-部署博客"><a href="#9-部署博客" class="headerlink" title="9. 部署博客"></a>9. 部署博客</h2><p>Hexo 支持多种部署方式，最常用的是部署到 GitHub Pages。首先需要安装部署插件：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>_config.yml</code> 中配置部署信息，例如：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/username/repo.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span></span><br></pre></td></tr></table></figure>
+
+<p>最后使用以下命令部署博客：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-自动化部署（可选）"><a href="#10-自动化部署（可选）" class="headerlink" title="10. 自动化部署（可选）"></a>10. 自动化部署（可选）</h2><p>可以设置自动化脚本来简化部署过程。创建一个 <code>deploy.sh</code> 文件：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理</span></span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 部署</span></span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>然后赋予脚本执行权限：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x deploy.sh</span><br></pre></td></tr></table></figure>
+
+<p>每次部署时，只需运行这个脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">./deploy.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-更新和管理"><a href="#11-更新和管理" class="headerlink" title="11. 更新和管理"></a>11. 更新和管理</h2><ul>
+<li><p><strong>更新 Hexo</strong>：可以通过 npm 更新 Hexo 和插件：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm update hexo</span><br><span class="line">npm update hexo-cli</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装插件</strong>：Hexo 有许多插件，可以通过 npm 安装。例如，安装站点地图生成器插件：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></table></figure>
+
+<p>  然后在 <strong>_config.yml</strong> 中添加插件配置：</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">sitemap:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">sitemap.xml</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="常见问题排查"><a href="#常见问题排查" class="headerlink" title="常见问题排查"></a>常见问题排查</h2><ul>
+<li><p>清理缓存和生成文件</p>
+<p>  ：如果遇到问题，可以尝试清理缓存和生成文件：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看日志</strong>：检查终端输出的日志信息，帮助定位问题。</p>
+</li>
+<li><p><strong>文档和社区</strong>：参考 Hexo 官方文档 和社区资源，获取更多帮助。</p>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Docker</title>
+    <url>/2024/07/12/Docker/</url>
+    <content><![CDATA[<p>Docker 是一个开源的容器化平台，旨在简化应用程序的开发、部署和运行过程。它通过将应用程序及其依赖项打包到一个名为“容器”的标准化单元中，实现了一次构建，到处运行的目标。</p>
+<h2 id="1-安装Node-js和npm"><a href="#1-安装Node-js和npm" class="headerlink" title="1. 安装Node.js和npm"></a>1. 安装Node.js和npm</h2><ol>
+<li><strong>容器（Container）</strong>：<ul>
+<li>容器是一个轻量级、独立的可执行包，它包含了软件运行所需的所有内容，包括代码、运行时、系统工具、系统库和设置。</li>
+<li>容器化技术使得应用程序可以在任何环境中一致地运行，无论是在开发环境、测试环境还是生产环境。</li>
+</ul>
+</li>
+<li><strong>映像（Image）</strong>：<ul>
+<li>映像是一个只读的模板，用来创建容器。它包含了运行容器所需的所有内容，包括操作系统、应用程序代码、依赖项等。</li>
+<li>映像可以从头开始创建，也可以基于现有的映像进行扩展。</li>
+</ul>
+</li>
+<li><strong>Dockerfile</strong>：<ul>
+<li>Dockerfile 是一个文本文件，包含了一系列指令，用于描述如何构建一个 Docker 映像。</li>
+<li>通过编写 Dockerfile，你可以定义应用程序的环境、安装依赖项、复制文件、设置环境变量等。</li>
+</ul>
+</li>
+<li><strong>Docker Hub</strong>：<ul>
+<li>Docker Hub 是一个公共的注册表，用于存储和分发 Docker 映像。你可以从 Docker Hub 上拉取（下载）已有的映像，或者将你自己的映像推送（上传）到 Docker Hub 上。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Docker-的优势"><a href="#Docker-的优势" class="headerlink" title="Docker 的优势"></a>Docker 的优势</h2><ol>
+<li><strong>一致的开发环境</strong>：Docker 容器确保应用程序在开发、测试和生产环境中的运行环境一致，避免了“在我的机器上没问题”的问题。</li>
+<li><strong>轻量级和高效</strong>：与虚拟机相比，容器更加轻量级，启动速度更快，资源利用率更高。</li>
+<li><strong>易于扩展和管理</strong>：使用 Docker，可以方便地扩展和管理分布式应用程序。</li>
+<li><strong>增强的安全性</strong>：容器在彼此之间以及与主机操作系统之间隔离，提高了安全性。</li>
+</ol>
+<h2 id="Docker-的基本工作流程"><a href="#Docker-的基本工作流程" class="headerlink" title="Docker 的基本工作流程"></a>Docker 的基本工作流程</h2><ol>
+<li><strong>编写 Dockerfile</strong>：定义应用程序环境和依赖项。</li>
+<li><strong>构建映像</strong>：使用 <code>docker build</code> 命令从 Dockerfile 构建一个 Docker 映像。</li>
+<li><strong>运行容器</strong>：使用 <code>docker run</code> 命令从映像创建并启动一个容器。</li>
+<li><strong>管理容器</strong>：使用 Docker 的各种命令管理正在运行的容器。</li>
+</ol>
+<h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><p>在目前的情况下 download.docker.com 访问不是特别稳定的情况下,可以使用阿里的地址来进行更新<br>一、安装<br>1、检查环境<br>1.1 卸载旧版docker</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> su</span><br><span class="line">apt remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
+
+<p>2、安装依赖</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">apt install ca-certificates curl gnupg lsb-release</span><br></pre></td></tr></table></figure>
+
+<p>3、添加密钥</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | <span class="built_in">sudo</span> gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+
+<p>4、添加Docker软件源</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu <span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>5、安装docker</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<p>6、启动docker</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>7、查看docker状态</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
+
+<p>8、将当前用户添加到docker组<br>避免每次使用Docker时都需要使用sudo（默认情况下，只有root用户和docker组的用户才能运行Docker命令）</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+
+<p>10、重启docker服务</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker-Hub-国内镜像设置方法"><a href="#Docker-Hub-国内镜像设置方法" class="headerlink" title="Docker Hub 国内镜像设置方法"></a>Docker Hub 国内镜像设置方法</h2><p>由于某些原因，Docker Hub官方仓库在国内已经无法拉取，如果是国内网络环境，可配置国内镜像使用，从而解决Docker镜像拉取失败或缓慢问题。</p>
+<h3 id="配置Docker镜像源"><a href="#配置Docker镜像源" class="headerlink" title="配置Docker镜像源"></a>配置Docker镜像源</h3><p>如果不存在<code>/etc/docker/daemon.json</code>这个配置文件，可以直接使用下面的命令：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /etc/docker</span><br><span class="line"><span class="comment"># 写入镜像配置</span></span><br><span class="line"><span class="built_in">sudo</span> vim /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;registry-mirrors&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;https://docker.m.daocloud.io&quot;</span>,</span><br><span class="line">        <span class="string">&quot;https://dockerproxy.com&quot;</span>,</span><br><span class="line">        <span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">        <span class="string">&quot;https://docker.nju.edu.cn&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 重启docker服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"><span class="built_in">sudo</span> systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>如果已经存在<code>/etc/docker/daemon.json</code>这个配置文件，手动复制下面的镜像地址加如到配置中：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;registry-mirrors&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;https://docker.m.daocloud.io&quot;</span>,</span><br><span class="line">        <span class="string">&quot;https://dockerproxy.com&quot;</span>,</span><br><span class="line">        <span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span>,</span><br><span class="line">        <span class="string">&quot;https://docker.nju.edu.cn&quot;</span></span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+
+<p>别忘记重启Docker服务：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 重启docker服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"><span class="built_in">sudo</span> systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="镜像管理"><a href="#镜像管理" class="headerlink" title="镜像管理"></a>镜像管理</h3><ol>
+<li><p><strong>查看镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker image <span class="built_in">ls</span> / docker images</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检索镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker search [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>拉取镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker pull [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>上传镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker push [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>保存镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker save [image] -o FILE / docker save [image] &gt; FILE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>导入镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker load -i FILE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看镜像历史</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">history</span> [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker rmi [image] / docker image <span class="built_in">rm</span> [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除不再使用的镜像</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>将文件系统导入为镜像</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker import [URL/FILE]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>从容器创建镜像</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker commit [container] [image]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="容器管理"><a href="#容器管理" class="headerlink" title="容器管理"></a>容器管理</h3><ol>
+<li><p><strong>创建容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker create [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建并运行容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker start [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>停止容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker stop [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重启容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker restart [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>列出正在运行的容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker ps / docker container <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>列出所有容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker ps -a / docker container <span class="built_in">ls</span> -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>以交互模式加入容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it [container] bash / docker attach [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>导出容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">export</span> [container] -o FILE / docker <span class="built_in">export</span> [container] &gt; FILE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>导入容器快照</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker import FILE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看容器日志</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker logs [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除容器</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">rm</span> [container] / docker container <span class="built_in">rm</span> [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看容器端口映射</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker port [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示容器内进程</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker top [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>复制本地文件到容器内的指定路径</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">cp</span> [FILE] [container]:[PATH]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示容器内的变化</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker diff [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示容器资源使用情况</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker stats [container]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="容器运行"><a href="#容器运行" class="headerlink" title="容器运行"></a>容器运行</h3><ol>
+<li><p><strong>创建，运行并命名容器</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run --name [name] [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并后台运行</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -d [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并指定端口映射</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -p [hostPort]:[containerPort] [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并指定端口映射（随机分配）</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -P [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并指定环境变量</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -e [key=value] [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并指定工作目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -w [PATH] [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并指定容器名称</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -name [name] [image]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并在容器中执行命令（交互模式）</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run [image] [<span class="built_in">command</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个容器并指定容器名称，后台运行，端口映射，环境变量和工作目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -d -p [hostPort]:[containerPort] -e [key-value] -w [PATH] --name [name] [image]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="网络管理"><a href="#网络管理" class="headerlink" title="网络管理"></a>网络管理</h3><ol>
+<li><p><strong>列出可用网络</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker network <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看网络详细信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker network inspect [network]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建一个新的网络</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker network create [network]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除一个网络</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker network <span class="built_in">rm</span> [network]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>将容器连接到网络</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker network connect [network] [container]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>将容器从网络断开</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker network disconnect [network] [container]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="数据卷管理"><a href="#数据卷管理" class="headerlink" title="数据卷管理"></a>数据卷管理</h3><ol>
+<li><p><strong>创建一个数据卷</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker volume create [volume]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看数据卷</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker volume <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看数据卷详细信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker volume inspect [volume]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除数据卷</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker volume <span class="built_in">rm</span> [volume]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除所有未使用的数据卷</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker volume prune</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="插件管理"><a href="#插件管理" class="headerlink" title="插件管理"></a>插件管理</h3><ol>
+<li><p><strong>列出插件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker plugin <span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装插件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker plugin install [plugin]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动插件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker plugin <span class="built_in">enable</span> [plugin]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>禁用插件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker plugin <span class="built_in">disable</span> [plugin]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>卸载插件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker plugin <span class="built_in">rm</span> [plugin]</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h3><ol>
+<li><p><strong>查看 Docker 系统信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看 Docker 版本</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看 Docker 帮助文档</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看 Docker 命令帮助</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker [<span class="built_in">command</span>] --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>登出&#x2F;退出 DockerHub</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker login/logout</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="常用-Dockerfile-指令"><a href="#常用-Dockerfile-指令" class="headerlink" title="常用 Dockerfile 指令"></a>常用 Dockerfile 指令</h2><p>指定基础镜像，必须为 Dockerfile 的第一天指令</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> [base_image]</span><br></pre></td></tr></table></figure>
+
+<p>用于将文件复制到镜像中，源可以是URL或者本地文件，也可以是一个压缩文件</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ADD</span></span><br></pre></td></tr></table></figure>
+
+<p>用于将文件拷贝到镜像中，源只能是本地文件</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] [<span class="built_in">source</span>] [destination]</span></span><br></pre></td></tr></table></figure>
+
+<p>用于指定工作目录，可以使用多个 WORKDIR 指令，如果使用相对路径，则是对上一条 WORKDIR 指令所指向的目录</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> [PATH]</span></span><br></pre></td></tr></table></figure>
+
+<p>用于设置环境变量</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ENV</span> &lt;key&gt;&lt;value&gt; / <span class="keyword">ENV</span> &lt;key1&gt;=&lt;value1&gt; &lt;key2&gt;=&lt;value2&gt;...</span><br></pre></td></tr></table></figure>
+
+<p>用于指定默认的容器主进程，每个 Dockerfile 中只能有一条 CMD 指令，如果有多条，则只有最后一条会生效</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="built_in">command</span>] / CMD [<span class="string">&quot;可执行文件&quot;</span>,<span class="string">&quot;参数1&quot;</span>,<span class="string">&quot;参数2&quot;</span>...]</span></span><br></pre></td></tr></table></figure>
+
+<p>用于定义匿名卷（持久化目录）</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">VOLUME</span><span class="language-bash"> [PATH] / VOLUME [<span class="string">&quot;路径1&quot;</span>, <span class="string">&quot;路径2&quot;</span>...]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="创建-Dockerfile"><a href="#创建-Dockerfile" class="headerlink" title="创建 Dockerfile"></a>创建 Dockerfile</h2><p>Dockerfile 是一个定义了如何构建 Docker 映像的文本文件。以下是一个简单的示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用官方的 Node.js 映像作为基础映像</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建并设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制 package.json 和 package-lock.json</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装项目依赖</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制应用程序源代码</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露应用程序运行的端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动应用程序</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;node&quot;</span>, <span class="string">&quot;app.js&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="构建和运行映像"><a href="#构建和运行映像" class="headerlink" title="构建和运行映像"></a>构建和运行映像</h3><ol>
+<li><p><strong>构建 Docker 映像</strong>:</p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker build -t my-node-app .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>运行构建的映像</strong>:</p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -p 8080:8080 my-node-app</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>通过以上步骤，你可以将 Node.js 应用程序打包到一个 Docker 容器中，并在任何支持 Docker 的环境中运行它。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Git</title>
+    <url>/2024/07/12/Git/</url>
+    <content><![CDATA[<p>Git 是一种分布式版本控制系统（DVCS），最初由林纳斯·托瓦兹（Linus Torvalds）为管理 Linux 内核开发而创建。Git 是开源的，并且在许多软件开发项目中得到了广泛应用。以下是 Git 的一些关键特性和用途：</p>
+<hr>
+<h2 id="Git-的关键特性"><a href="#Git-的关键特性" class="headerlink" title="Git 的关键特性"></a>Git 的关键特性</h2><ol>
+<li><strong>分布式</strong>：<ul>
+<li>每个开发者的工作目录都是一个完整的代码库，包含项目的完整历史。这意味着即使没有网络连接，开发者也可以进行代码提交、分支操作等。</li>
+</ul>
+</li>
+<li><strong>高效</strong>：<ul>
+<li>Git 通过数据压缩和差异存储技术，确保了即使是大项目也能高效地管理版本历史。</li>
+</ul>
+</li>
+<li><strong>分支和合并</strong>：<ul>
+<li>Git 提供了强大的分支管理功能，允许开发者轻松创建、合并和删除分支，从而支持并行开发和协作。</li>
+</ul>
+</li>
+<li><strong>数据完整性</strong>：<ul>
+<li>Git 使用 SHA-1 哈希值来唯一标识每个提交，确保了版本历史的完整性和安全性。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Git-的用途"><a href="#Git-的用途" class="headerlink" title="Git 的用途"></a>Git 的用途</h2><ol>
+<li><strong>版本控制</strong>：<ul>
+<li>Git 可以记录项目的每次修改，并允许开发者回滚到之前的版本。这对于代码管理和故障排查非常有用。</li>
+</ul>
+</li>
+<li><strong>协作开发</strong>：<ul>
+<li>Git 支持多人协作开发，每个开发者可以在自己的分支上进行工作，最后合并到主分支。</li>
+</ul>
+</li>
+<li><strong>代码备份</strong>：<ul>
+<li>由于 Git 的分布式特性，每个开发者的本地仓库都是完整的备份，极大地提高了项目的安全性。</li>
+</ul>
+</li>
+<li><strong>代码审查</strong>：<ul>
+<li>Git 支持 Pull Request 和 Code Review，帮助团队成员相互审查代码，提高代码质量。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Git-的工作区域"><a href="#Git-的工作区域" class="headerlink" title="Git 的工作区域"></a>Git 的工作区域</h2><ol>
+<li><strong>工作目录（Working Directory）</strong><ul>
+<li>这是你当前正在工作的目录，其中包含了项目的实际文件。你可以在这里进行文件的添加、修改和删除等操作。</li>
+</ul>
+</li>
+<li><strong>暂存区（Staging Area）</strong><ul>
+<li>暂存区也叫索引（Index），是一个临时存储区域，用于存放将要提交到仓库的文件快照。通过 <code>git add</code> 命令将文件的修改从工作目录添加到暂存区。</li>
+</ul>
+</li>
+<li><strong>本地仓库（Local Repository）</strong><ul>
+<li>本地仓库是你计算机上的一个隐藏目录（<code>.git</code>），其中包含所有的提交历史和对象数据库。通过 <code>git commit</code> 命令将暂存区的内容提交到本地仓库。</li>
+</ul>
+</li>
+<li><strong>远程仓库（Remote Repository）</strong><ul>
+<li>远程仓库是托管在服务器上的 Git 仓库，通常用于与其他开发者协作。通过 <code>git push</code> 和 <code>git pull</code> 命令与远程仓库进行交互。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Git-的文件状态"><a href="#Git-的文件状态" class="headerlink" title="Git 的文件状态"></a>Git 的文件状态</h2><p>在 Git 中，文件可以处于以下四种状态之一：</p>
+<ol>
+<li><strong>未跟踪（Untracked）</strong><ul>
+<li>文件在工作目录中，但没有被 Git 跟踪。即，文件还没有添加到暂存区。</li>
+</ul>
+</li>
+<li><strong>已跟踪（Tracked）</strong><ul>
+<li>文件已经被 Git 跟踪，可能处于已修改、已暂存或未修改状态。<ul>
+<li><strong>未修改（Unmodified）</strong>：文件没有任何改动。</li>
+<li><strong>已修改（Modified）</strong>：文件有改动，但尚未添加到暂存区。</li>
+<li><strong>已暂存（Staged）</strong>：文件的改动已经添加到暂存区，等待提交。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Git-的基本使用方式"><a href="#Git-的基本使用方式" class="headerlink" title="Git 的基本使用方式"></a>Git 的基本使用方式</h2><h3 id="1-设置-Git"><a href="#1-设置-Git" class="headerlink" title="1. 设置 Git"></a>1. 设置 Git</h3><h4 id="配置用户信息"><a href="#配置用户信息" class="headerlink" title="配置用户信息"></a>配置用户信息</h4><p>在使用 Git 之前，首先需要配置用户信息，这些信息会记录在你的提交中。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#配置用户名</span></span><br><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line"><span class="comment">#配置邮箱</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your.email@example.com&quot;</span></span><br><span class="line"><span class="comment">#存储配置</span></span><br><span class="line">git config --global credential.helper store</span><br></pre></td></tr></table></figure>
+
+<h4 id="检查配置"><a href="#检查配置" class="headerlink" title="检查配置"></a>检查配置</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建和管理仓库"><a href="#2-创建和管理仓库" class="headerlink" title="2. 创建和管理仓库"></a>2. 创建和管理仓库</h3><h4 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h4><p>在一个新的或现有的目录中初始化一个 Git 仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/your/project</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<h4 id="克隆现有仓库"><a href="#克隆现有仓库" class="headerlink" title="克隆现有仓库"></a>克隆现有仓库</h4><p>从远程仓库克隆：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;url&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-添加和提交"><a href="#3-添加和提交" class="headerlink" title="3. 添加和提交"></a>3. 添加和提交</h3><h4 id="添加文件到暂存区"><a href="#添加文件到暂存区" class="headerlink" title="添加文件到暂存区"></a>添加文件到暂存区</h4><p>将文件添加到暂存区（准备提交）：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git add &lt;file&gt;</span><br><span class="line"><span class="comment"># 或者添加所有变化的文件</span></span><br><span class="line">git add .</span><br></pre></td></tr></table></figure>
+
+<h4 id="提交更改"><a href="#提交更改" class="headerlink" title="提交更改"></a>提交更改</h4><p>将暂存区中的文件提交到本地仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;描述你的更改&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-查看状态或差异"><a href="#4-查看状态或差异" class="headerlink" title="4.查看状态或差异"></a>4.查看状态或差异</h3><h4 id="查看仓库状态"><a href="#查看仓库状态" class="headerlink" title="查看仓库状态"></a>查看仓库状态</h4><p>查看当前仓库的状态，包括未跟踪的文件、未提交的更改等：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h4><p>查看提交日志：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br><span class="line"><span class="comment">#--oneline表示简略模式</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br></pre></td></tr></table></figure>
+
+<h4 id="比较文件差异"><a href="#比较文件差异" class="headerlink" title="比较文件差异"></a>比较文件差异</h4><p>比较工作目录和暂存区之间的差异：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+
+<p>比较暂存区和最新提交之间的差异：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure>
+
+<p>比较工作目录和最新提交之间的差异：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git diff HEAD</span><br></pre></td></tr></table></figure>
+
+<p>比较两个提交之间的差异</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git diff &lt;commit1&gt; &lt;commit2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>比较分支之间的差异</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git diff &lt;branch1&gt; &lt;branch2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-分支管理"><a href="#5-分支管理" class="headerlink" title="5. 分支管理"></a>5. 分支管理</h3><h4 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h4><p>创建一个新分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h4><p>切换到指定分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git checkout &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在较新的 Git 版本中，可以用 <code>git switch</code> 命令：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git switch &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建并切换分支"><a href="#创建并切换分支" class="headerlink" title="创建并切换分支"></a>创建并切换分支</h4><p>创建一个新分支并立即切换到该分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git checkout -b &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>git switch</code> 命令的等效操作：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git switch -c &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h4><p>查看所有本地分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p>查看所有远程分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+
+<p>查看所有分支（包括本地和远程）：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<h4 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h4><p>将指定分支合并到当前分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git merge &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><p>删除一个已经合并的分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch -d &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>删除一个分支，不管是否合并：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch -D &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-远程仓库"><a href="#6-远程仓库" class="headerlink" title="6. 远程仓库"></a>6. 远程仓库</h3><h4 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h4><p>添加远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git remote add &lt;remote-name&gt; &lt;remote-url&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看远程仓库"><a href="#查看远程仓库" class="headerlink" title="查看远程仓库"></a>查看远程仓库</h4><p>查看配置的远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除远程仓库"><a href="#删除远程仓库" class="headerlink" title="删除远程仓库"></a>删除远程仓库</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git remote <span class="built_in">rm</span> &lt;remote-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重命名远程仓库"><a href="#重命名远程仓库" class="headerlink" title="重命名远程仓库"></a>重命名远程仓库</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git remote rename &lt;old-name&gt; &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="推送更改到远程仓库"><a href="#推送更改到远程仓库" class="headerlink" title="推送更改到远程仓库"></a>推送更改到远程仓库</h4><p>推送当前分支到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push &lt;remote-name&gt; &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>推送所有分支到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push --all origin</span><br></pre></td></tr></table></figure>
+
+<h4 id="拉取远程仓库的更改"><a href="#拉取远程仓库的更改" class="headerlink" title="拉取远程仓库的更改"></a>拉取远程仓库的更改</h4><p>从远程仓库拉取.默认拉取远程仓库名origin的master或者main分支</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git pull &lt;remote-name&gt; &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将本地改动的代码rebase到远程仓库的最新代码上</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git pull --rebase</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取远程仓库的更改（不合并）"><a href="#获取远程仓库的更改（不合并）" class="headerlink" title="获取远程仓库的更改（不合并）"></a>获取远程仓库的更改（不合并）</h4><p>获取远程仓库的最新更改，但不合并：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git fetch &lt;remote-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-标签管理"><a href="#7-标签管理" class="headerlink" title="7. 标签管理"></a>7. 标签管理</h3><h4 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h4><p>创建一个轻量级标签：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git tag tag-name</span><br></pre></td></tr></table></figure>
+
+<p>创建一个带注释的标签：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git tag -a tag-name -m <span class="string">&quot;描述标签&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看标签"><a href="#查看标签" class="headerlink" title="查看标签"></a>查看标签</h4><p>查看所有标签：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+
+<h4 id="推送标签到远程仓库"><a href="#推送标签到远程仓库" class="headerlink" title="推送标签到远程仓库"></a>推送标签到远程仓库</h4><p>推送单个标签到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push origin tag-name</span><br></pre></td></tr></table></figure>
+
+<p>推送所有标签到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-撤销和恢复"><a href="#8-撤销和恢复" class="headerlink" title="8. 撤销和恢复"></a>8. 撤销和恢复</h3><h4 id="移动一个文件到新的位置"><a href="#移动一个文件到新的位置" class="headerlink" title="移动一个文件到新的位置"></a>移动一个文件到新的位置</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">mv</span> &lt;file&gt; &lt;new-file&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除一个文件"><a href="#删除一个文件" class="headerlink" title="删除一个文件"></a>删除一个文件</h4><p>从工作区和暂存区删除一个文件，并且将这次删除放入暂存区</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从暂存区删除文件</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="恢复一个文件到之前的版本"><a href="#恢复一个文件到之前的版本" class="headerlink" title="恢复一个文件到之前的版本"></a>恢复一个文件到之前的版本</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git checkout &lt;file&gt; &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建一个新的提交，用来撤销指定的提交"><a href="#创建一个新的提交，用来撤销指定的提交" class="headerlink" title="创建一个新的提交，用来撤销指定的提交"></a>创建一个新的提交，用来撤销指定的提交</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git revert &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="用于重置当前分支的-HEAD-到指定提交，并根据需要更改暂存区和工作目录。"><a href="#用于重置当前分支的-HEAD-到指定提交，并根据需要更改暂存区和工作目录。" class="headerlink" title="用于重置当前分支的 HEAD 到指定提交，并根据需要更改暂存区和工作目录。"></a>用于重置当前分支的 HEAD 到指定提交，并根据需要更改暂存区和工作目录。</h4><p>软重置（仅重置 HEAD，保留暂存区和工作目录的更改）：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git reset --soft &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<p>混合重置（重置 HEAD 和暂存区，保留工作目录的更改）这是默认模式。：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git reset --mixed &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<p>硬重置（重置 HEAD、暂存区和工作目录，丢弃所有更改）：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git reset --hard &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="撤销暂存区的文件，重新放回工作区"><a href="#撤销暂存区的文件，重新放回工作区" class="headerlink" title="撤销暂存区的文件，重新放回工作区"></a>撤销暂存区的文件，重新放回工作区</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git restore --staged &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="特殊文件"><a href="#特殊文件" class="headerlink" title="特殊文件"></a>特殊文件</h2><p>在 Git 中，有一些特殊文件用于配置、忽略文件、处理钩子等。这些文件有助于管理和自定义 Git 仓库的行为。以下是一些常见的 Git 特殊文件及其用途：</p>
+<h3 id="1-gitignore"><a href="#1-gitignore" class="headerlink" title="1. .gitignore"></a>1. <code>.gitignore</code></h3><p><code>.gitignore</code> 文件用于指定应被 Git 忽略的文件或目录。Git 在将文件添加到版本控制中时，会参考 <code>.gitignore</code> 文件中的规则。</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 忽略所有 .log 文件</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># 忽略名为 tmp 的目录</span><br><span class="line">tmp/</span><br><span class="line"></span><br><span class="line"># 忽略所有 .tmp 文件，除了 special.tmp</span><br><span class="line">*.tmp</span><br><span class="line">!special.tmp</span><br><span class="line"></span><br><span class="line"># 忽略 node_modules 目录</span><br><span class="line">node_modules/</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-gitattributes"><a href="#2-gitattributes" class="headerlink" title="2. .gitattributes"></a>2. <code>.gitattributes</code></h3><p><code>.gitattributes</code> 文件用于定义文件的属性。这些属性可以用于文本文件的行尾转换、差异化算法等。</p>
+<h4 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 设置所有 .sh 文件为可执行文件</span><br><span class="line">*.sh export-ignore</span><br><span class="line"></span><br><span class="line"># 将所有 .jpg 文件标记为二进制文件</span><br><span class="line">*.jpg binary</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-gitkeep"><a href="#3-gitkeep" class="headerlink" title="3. .gitkeep"></a>3. <code>.gitkeep</code></h3><p><code>.gitkeep</code> 并不是 Git 官方定义的特殊文件，但它是社区广泛使用的约定，用于确保空目录被保留在 Git 仓库中。Git 默认不跟踪空目录，因此可以在空目录中添加一个 <code>.gitkeep</code> 文件以确保其存在。</p>
+<h4 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个空目录并添加 .gitkeep 文件</span></span><br><span class="line"><span class="built_in">mkdir</span> empty_directory</span><br><span class="line"><span class="built_in">touch</span> empty_directory/.gitkeep</span><br><span class="line">git add empty_directory/.gitkeep</span><br><span class="line">git commit -m <span class="string">&quot;Add .gitkeep to keep empty directory&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-gitmodules"><a href="#4-gitmodules" class="headerlink" title="4. .gitmodules"></a>4. <code>.gitmodules</code></h3><p><code>.gitmodules</code> 文件用于定义子模块。子模块是一个嵌入到另一个 Git 仓库中的外部 Git 仓库。</p>
+<h4 id="示例：-3"><a href="#示例：-3" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[submodule &quot;path/to/submodule&quot;]</span><br><span class="line">    path = path/to/submodule</span><br><span class="line">    url = https://github.com/user/repo.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-git-config"><a href="#5-git-config" class="headerlink" title="5. .git/config"></a>5. <code>.git/config</code></h3><p><code>.git/config</code> 文件存储了仓库级别的配置设置。你可以通过 <code>git config</code> 命令来修改这些设置。</p>
+<h4 id="示例：-4"><a href="#示例：-4" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[core]</span><br><span class="line">    repositoryformatversion = 0</span><br><span class="line">    filemode = true</span><br><span class="line">    bare = false</span><br><span class="line">    logallrefupdates = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">    url = https://github.com/user/repo.git</span><br><span class="line">    fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-mailmap"><a href="#6-mailmap" class="headerlink" title="6. .mailmap"></a>6. <code>.mailmap</code></h3><p><code>.mailmap</code> 文件用于规范化提交历史中的作者和提交者信息，解决同一作者使用多个名字或邮件地址的问题。</p>
+<h4 id="示例：-5"><a href="#示例：-5" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 规范化作者信息</span><br><span class="line">Correct Name &lt;correct.email@example.com&gt; &lt;incorrect.email@example.com&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-Git-Hook-文件"><a href="#7-Git-Hook-文件" class="headerlink" title="7. Git Hook 文件"></a>7. Git Hook 文件</h3><p>Git Hook 是存储在 <code>.git/hooks</code> 目录中的脚本文件，它们在 Git 仓库中触发各种事件时执行。常见的 Hook 文件包括：</p>
+<ul>
+<li><code>pre-commit</code>：在执行 <code>git commit</code> 之前运行。</li>
+<li><code>commit-msg</code>：在提交信息编辑完成后、提交保存之前运行。</li>
+<li><code>post-commit</code>：在提交完成后运行。</li>
+<li><code>pre-receive</code>：在接收到推送之前运行（在服务器端）。</li>
+<li><code>post-receive</code>：在接收到推送之后运行（在服务器端）。</li>
+</ul>
+<h4 id="示例：-6"><a href="#示例：-6" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># .git/hooks/pre-commit</span></span><br><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 检查是否有未格式化的代码</span></span><br><span class="line"><span class="keyword">if</span> git diff --cached | grep -q <span class="string">&#x27;^[+-]&#x27;</span>; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Commit rejected: Please format your code before committing.&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="Git的高级特性"><a href="#Git的高级特性" class="headerlink" title="Git的高级特性"></a>Git的高级特性</h2><p>Git 不仅提供了基本的版本控制功能，还拥有许多高级特性，这些特性可以帮助你在复杂的开发场景中更好地管理代码和协作。以下是一些 Git 的高级特性及其使用方法：</p>
+<h3 id="1-交互式暂存（Interactive-Staging）"><a href="#1-交互式暂存（Interactive-Staging）" class="headerlink" title="1. 交互式暂存（Interactive Staging）"></a>1. 交互式暂存（Interactive Staging）</h3><p>交互式暂存允许你选择性地暂存文件的某些部分而不是整个文件。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git add -p</span><br></pre></td></tr></table></figure>
+
+<p>这将会提示你暂存每个变化部分，你可以选择暂存、跳过、分割等操作。</p>
+<h3 id="2-Rebase"><a href="#2-Rebase" class="headerlink" title="2. Rebase"></a>2. Rebase</h3><p><code>git rebase</code> 允许你在保持提交历史整洁的情况下，将一个分支的更改应用到另一个分支之上。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将当前分支的提交应用到指定分支之上</span></span><br><span class="line">git rebase branch-name</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Cherry-Pick"><a href="#3-Cherry-Pick" class="headerlink" title="3. Cherry-Pick"></a>3. Cherry-Pick</h3><p><code>git cherry-pick</code> 允许你从一个分支中选择一个特定的提交并将其应用到当前分支。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 将指定提交应用到当前分支</span></span><br><span class="line">git cherry-pick commit-hash</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Stash"><a href="#4-Stash" class="headerlink" title="4. Stash"></a>4. Stash</h3><p><code>git stash</code> 允许你暂时保存当前工作目录的修改，以便在稍后恢复。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 保存当前修改</span></span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复最近一次的 stash</span></span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有 stash</span></span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复特定的 stash</span></span><br><span class="line">git stash apply stash@&#123;n&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除特定的 stash</span></span><br><span class="line">git stash drop stash@&#123;n&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-子模块（Submodules）"><a href="#5-子模块（Submodules）" class="headerlink" title="5. 子模块（Submodules）"></a>5. 子模块（Submodules）</h3><p>子模块允许你将一个 Git 仓库嵌入到另一个 Git 仓库中，适用于管理依赖项或子项目。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加子模块</span></span><br><span class="line">git submodule add https://github.com/user/repo.git path/to/submodule</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化并更新子模块</span></span><br><span class="line">git submodule update --init --recursive</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新子模块到最新版本</span></span><br><span class="line"><span class="built_in">cd</span> path/to/submodule</span><br><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Subtree"><a href="#6-Subtree" class="headerlink" title="6. Subtree"></a>6. Subtree</h3><p><code>git subtree</code> 是一种将一个仓库的内容合并到另一个仓库中的方法，比子模块更简单一些。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加子树</span></span><br><span class="line">git subtree add --prefix=path/to/subtree https://github.com/user/repo.git main --squash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从子树仓库拉取更新</span></span><br><span class="line">git subtree pull --prefix=path/to/subtree https://github.com/user/repo.git main --squash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送更新到子树仓库</span></span><br><span class="line">git subtree push --prefix=path/to/subtree https://github.com/user/repo.git main</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-重写历史"><a href="#7-重写历史" class="headerlink" title="7. 重写历史"></a>7. 重写历史</h3><p>Git 提供了一些工具来重写提交历史，适用于修改提交信息、合并提交等。</p>
+<h4 id="修改最近一次提交"><a href="#修改最近一次提交" class="headerlink" title="修改最近一次提交"></a>修改最近一次提交</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+
+<h4 id="交互式重写历史"><a href="#交互式重写历史" class="headerlink" title="交互式重写历史"></a>交互式重写历史</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git rebase -i HEAD~n</span><br></pre></td></tr></table></figure>
+
+<p>这将会打开一个交互式界面，允许你修改、合并、重排或删除最近的 n 次提交。</p>
+<h3 id="8-Bisect"><a href="#8-Bisect" class="headerlink" title="8. Bisect"></a>8. Bisect</h3><p><code>git bisect</code> 允许你使用二分查找法来定位引入错误的提交。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 开始 bisect，指定一个已知良好的提交和一个已知有问题的提交</span></span><br><span class="line">git bisect start</span><br><span class="line">git bisect good known-good-commit</span><br><span class="line">git bisect bad known-bad-commit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据测试结果标记提交</span></span><br><span class="line">git bisect good</span><br><span class="line">git bisect bad</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找到引入错误的提交后，结束 bisect</span></span><br><span class="line">git bisect reset</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Blame"><a href="#9-Blame" class="headerlink" title="9. Blame"></a>9. Blame</h3><p><code>git blame</code> 显示每一行代码的最后修改者和修改时间，有助于代码审查和调试。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git blame filename</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Hooks"><a href="#10-Hooks" class="headerlink" title="10. Hooks"></a>10. Hooks</h3><p>Git 提供了一组钩子（hooks），允许你在特定的 Git 操作前后执行脚本，适用于自动化任务和自定义工作流。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 钩子脚本存放在 .git/hooks 目录中，例如 pre-commit 钩子：</span></span><br><span class="line">.git/hooks/pre-commit</span><br></pre></td></tr></table></figure>
+
+<p>在 pre-commit 脚本中可以编写要在提交之前执行的命令，例如代码格式检查、测试等。</p>
+<h3 id="11-Worktree"><a href="#11-Worktree" class="headerlink" title="11. Worktree"></a>11. Worktree</h3><p><code>git worktree</code> 允许你在同一个仓库中创建多个工作目录，从而能够并行处理多个分支。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建一个新的工作目录</span></span><br><span class="line">git worktree add /path/to/new-worktree branch-name</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="GitFlow"><a href="#GitFlow" class="headerlink" title="GitFlow"></a>GitFlow</h2><p>GitFlow 是一种 Git 工作流模型，旨在简化团队协作并确保项目的稳定性和有序性。它引入了明确的分支模型，并定义了具体的分支类型和使用方式。GitFlow 由 Vincent Driessen 提出，并已成为许多团队的标准工作流。以下是 GitFlow 的基本概念和操作指南：</p>
+<h3 id="GitFlow-分支模型"><a href="#GitFlow-分支模型" class="headerlink" title="GitFlow 分支模型"></a>GitFlow 分支模型</h3><p>GitFlow 包含以下几种主要分支：</p>
+<ol>
+<li><strong>主分支（master）</strong><ul>
+<li>存放的是已经发布的生产环境代码。每一个提交都是一个新的生产版本。</li>
+</ul>
+</li>
+<li><strong>开发分支（develop）</strong><ul>
+<li>存放最新的开发代码。开发人员在这个分支上进行日常的开发工作。</li>
+</ul>
+</li>
+<li><strong>功能分支（feature）</strong><ul>
+<li>用于开发新功能，从 <code>develop</code> 分支创建，功能开发完成后合并回 <code>develop</code> 分支。</li>
+</ul>
+</li>
+<li><strong>发布分支（release）</strong><ul>
+<li>用于准备新版本的发布。从 <code>develop</code> 分支创建，修复bug和进行版本发布前的准备工作。完成后合并到 <code>master</code> 和 <code>develop</code> 分支，并打上标签。</li>
+</ul>
+</li>
+<li><strong>修补分支（hotfix）</strong><ul>
+<li>用于紧急修复生产环境中的 bug。从 <code>master</code> 分支创建，修复完成后合并回 <code>master</code> 和 <code>develop</code> 分支，并打上标签。</li>
+</ul>
+</li>
+</ol>
+<h3 id="GitFlow-工作流"><a href="#GitFlow-工作流" class="headerlink" title="GitFlow 工作流"></a>GitFlow 工作流</h3><h4 id="1-初始化-GitFlow"><a href="#1-初始化-GitFlow" class="headerlink" title="1. 初始化 GitFlow"></a>1. 初始化 GitFlow</h4><p>在现有的 Git 仓库中初始化 GitFlow：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git flow init</span><br></pre></td></tr></table></figure>
+
+<p>系统将提示你输入各个分支的名称，通常使用默认设置即可。</p>
+<h4 id="2-功能分支（Feature-Branch）"><a href="#2-功能分支（Feature-Branch）" class="headerlink" title="2. 功能分支（Feature Branch）"></a>2. 功能分支（Feature Branch）</h4><p>功能分支用于开发新功能。通常从 <code>develop</code> 分支创建。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建并切换到一个新的功能分支</span></span><br><span class="line">git flow feature start feature-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开发完成后，合并功能分支回 develop 分支并删除该功能分支</span></span><br><span class="line">git flow feature finish feature-name</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-发布分支（Release-Branch）"><a href="#3-发布分支（Release-Branch）" class="headerlink" title="3. 发布分支（Release Branch）"></a>3. 发布分支（Release Branch）</h4><p>发布分支用于准备发布新版本。通常从 <code>develop</code> 分支创建。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建并切换到一个新的发布分支</span></span><br><span class="line">git flow release start release-version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以在发布分支上修复 bug 和进行版本准备工作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成发布后，合并发布分支到 master 和 develop 分支，打上标签并删除发布分支</span></span><br><span class="line">git flow release finish release-version</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-修补分支（Hotfix-Branch）"><a href="#4-修补分支（Hotfix-Branch）" class="headerlink" title="4. 修补分支（Hotfix Branch）"></a>4. 修补分支（Hotfix Branch）</h4><p>修补分支用于紧急修复生产环境中的 bug。通常从 <code>master</code> 分支创建。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建并切换到一个新的修补分支</span></span><br><span class="line">git flow hotfix start hotfix-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修复完成后，合并修补分支到 master 和 develop 分支，打上标签并删除修补分支</span></span><br><span class="line">git flow hotfix finish hotfix-name</span><br></pre></td></tr></table></figure>
+
+<h3 id="GitFlow-命令总结"><a href="#GitFlow-命令总结" class="headerlink" title="GitFlow 命令总结"></a>GitFlow 命令总结</h3><ul>
+<li>初始化 GitFlow：<code>git flow init</code></li>
+<li>开始一个功能分支：<code>git flow feature start feature-name</code></li>
+<li>完成一个功能分支：<code>git flow feature finish feature-name</code></li>
+<li>开始一个发布分支：<code>git flow release start release-version</code></li>
+<li>完成一个发布分支：<code>git flow release finish release-version</code></li>
+<li>开始一个修补分支：<code>git flow hotfix start hotfix-name</code></li>
+<li>完成一个修补分支：<code>git flow hotfix finish hotfix-name</code></li>
+</ul>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>以下是一个使用 GitFlow 工作流的完整示例：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化 GitFlow</span></span><br><span class="line">git flow init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始一个新的功能分支</span></span><br><span class="line">git flow feature start new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在功能分支上进行开发</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Some feature code&quot;</span> &gt; feature.txt</span><br><span class="line">git add feature.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add new feature&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成功能分支，合并到 develop 分支</span></span><br><span class="line">git flow feature finish new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始一个新的发布分支</span></span><br><span class="line">git flow release start 1.0.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行一些发布前的修改</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Release notes&quot;</span> &gt; RELEASE_NOTES.txt</span><br><span class="line">git add RELEASE_NOTES.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add release notes&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成发布分支，合并到 master 和 develop 分支，并打上标签</span></span><br><span class="line">git flow release finish 1.0.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始一个新的修补分支</span></span><br><span class="line">git flow hotfix start hotfix-1.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修复一个紧急 bug</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Hotfix&quot;</span> &gt; hotfix.txt</span><br><span class="line">git add hotfix.txt</span><br><span class="line">git commit -m <span class="string">&quot;Fix critical bug&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成修补分支，合并到 master 和 develop 分支，并打上标签</span></span><br><span class="line">git flow hotfix finish hotfix-1.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>GitFlow 是一种强大的 Git 工作流模型，通过定义明确的分支模型和操作流程，简化了团队协作和项目管理。通过使用 GitFlow，你可以更好地组织代码，确保代码的稳定性和有序性。</p>
+<hr>
+<h2 id="GitHub-Flow"><a href="#GitHub-Flow" class="headerlink" title="GitHub Flow"></a>GitHub Flow</h2><p>GitHub Flow 是一种简单而有效的 Git 工作流，特别适用于持续部署和持续集成的环境。与 GitFlow 相比，GitHub Flow 更加轻量级，主要依赖于 <code>master</code> 分支和短生命周期的特性分支。以下是 GitHub Flow 的基本概念和操作指南：</p>
+<h3 id="GitHub-Flow-工作流概述"><a href="#GitHub-Flow-工作流概述" class="headerlink" title="GitHub Flow 工作流概述"></a>GitHub Flow 工作流概述</h3><ol>
+<li><strong><code>master</code> 分支</strong><ul>
+<li><code>master</code> 分支始终保持在可部署的状态。每次合并到 <code>master</code> 分支都应该是一个稳定的版本。</li>
+</ul>
+</li>
+<li><strong>特性分支（Feature Branch）</strong><ul>
+<li>从 <code>master</code> 分支创建，用于开发新功能或修复 bug。开发完成后，通过 Pull Request（PR）将特性分支合并回 <code>master</code> 分支。</li>
+</ul>
+</li>
+</ol>
+<h3 id="GitHub-Flow-工作流程"><a href="#GitHub-Flow-工作流程" class="headerlink" title="GitHub Flow 工作流程"></a>GitHub Flow 工作流程</h3><h4 id="1-创建特性分支"><a href="#1-创建特性分支" class="headerlink" title="1. 创建特性分支"></a>1. 创建特性分支</h4><p>从 <code>master</code> 分支创建一个新的特性分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git checkout -b feature-branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-在特性分支上进行开发"><a href="#2-在特性分支上进行开发" class="headerlink" title="2. 在特性分支上进行开发"></a>2. 在特性分支上进行开发</h4><p>在特性分支上进行代码开发，提交更改：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进行一些修改</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Some changes&quot;</span> &gt; file.txt</span><br><span class="line">git add file.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add some changes&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-推送特性分支到远程仓库"><a href="#3-推送特性分支到远程仓库" class="headerlink" title="3. 推送特性分支到远程仓库"></a>3. 推送特性分支到远程仓库</h4><p>将本地特性分支推送到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push origin feature-branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-创建-Pull-Request"><a href="#4-创建-Pull-Request" class="headerlink" title="4. 创建 Pull Request"></a>4. 创建 Pull Request</h4><p>在 GitHub 上创建一个 Pull Request，请求将特性分支合并到 <code>master</code> 分支。Pull Request 应包括：</p>
+<ul>
+<li>开发完成的描述</li>
+<li>相关的测试结果</li>
+<li>代码审查者的评论</li>
+</ul>
+<h4 id="5-代码审查和合并"><a href="#5-代码审查和合并" class="headerlink" title="5. 代码审查和合并"></a>5. 代码审查和合并</h4><p>团队成员进行代码审查，通过后将特性分支合并到 <code>master</code> 分支：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge feature-branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-部署"><a href="#6-部署" class="headerlink" title="6. 部署"></a>6. 部署</h4><p>每次合并到 <code>master</code> 分支后，自动或手动将代码部署到生产环境。</p>
+<h3 id="使用示例-1"><a href="#使用示例-1" class="headerlink" title="使用示例"></a>使用示例</h3><p>以下是一个使用 GitHub Flow 工作流的完整示例：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 从 master 分支创建一个新的特性分支</span></span><br><span class="line">git checkout -b new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在特性分支上进行开发</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Some new feature&quot;</span> &gt; feature.txt</span><br><span class="line">git add feature.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add new feature&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送特性分支到远程仓库</span></span><br><span class="line">git push origin new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 Pull Request 并请求合并到 master 分支</span></span><br><span class="line"><span class="comment"># 在 GitHub 网站上进行此步骤</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 代码审查通过后，合并 Pull Request 并将特性分支合并到 master 分支</span></span><br><span class="line"><span class="comment"># 在 GitHub 网站上进行此步骤，或使用命令行</span></span><br><span class="line">git checkout master</span><br><span class="line">git pull origin master</span><br><span class="line">git merge new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地和远程的特性分支</span></span><br><span class="line">git branch -d new-feature</span><br><span class="line">git push origin --delete new-feature</span><br></pre></td></tr></table></figure>
+
+<h3 id="GitHub-Flow-的优点"><a href="#GitHub-Flow-的优点" class="headerlink" title="GitHub Flow 的优点"></a>GitHub Flow 的优点</h3><ol>
+<li><strong>简洁性</strong><ul>
+<li>GitHub Flow 非常简单，只使用 <code>master</code> 和特性分支，易于理解和操作。</li>
+</ul>
+</li>
+<li><strong>持续集成</strong><ul>
+<li>每次合并到 <code>master</code> 分支都可以触发持续集成和自动部署，确保代码的高质量和快速交付。</li>
+</ul>
+</li>
+<li><strong>代码审查</strong><ul>
+<li>通过 Pull Request 进行代码审查，确保代码质量和团队成员之间的协作。</li>
+</ul>
+</li>
+</ol>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><strong>保持 <code>master</code> 分支的稳定</strong><ul>
+<li><code>master</code> 分支始终应该保持可部署的状态。确保所有合并到 <code>master</code> 分支的代码都经过充分的测试和审查。</li>
+</ul>
+</li>
+<li><strong>频繁的小步提交</strong><ul>
+<li>尽量保持每次提交和合并的小步迭代，减少合并冲突和代码回归的风险。</li>
+</ul>
+</li>
+<li><strong>自动化测试和部署</strong><ul>
+<li>配置自动化测试和部署工具，如 GitHub Actions、Jenkins 等，每次合并到 <code>master</code> 分支后自动执行测试和部署。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>GitHub Flow 是一种简单而高效的 Git 工作流，特别适用于快速开发和持续集成的环境。通过合理使用特性分支和 Pull Request，团队可以保持高效协作和高质量的代码交付。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Liunx命令</title>
+    <url>/2024/07/12/Liunx%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>Linux 提供了一个强大的命令行接口，可以用于执行各种任务，如文件管理、进程控制、系统监控等。以下是一些常用的 Linux 命令及其用途：</p>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><ol>
+<li><p><strong>列出目录内容</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-l：长格式列出目录内容</li>
+<li>-a：显示所有文件，包括隐藏文件</li>
+<li>-r，–reverse：逆序排列目录内容</li>
+</ul>
+</li>
+<li><p><strong>改变工作目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> [directory]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示当前目录路径</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> [directory]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-p，–parents：如果目录已存在，不报错，且按需创建父目录</li>
+</ul>
+</li>
+<li><p><strong>删除文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> [file]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-R，-r，–recursive：递归地删除目录及他们内容</li>
+<li>-f，–force：强制删除，忽略不存在的文件和参数，不提示</li>
+</ul>
+</li>
+<li><p><strong>复制文件或目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> [<span class="built_in">source</span>] [destination]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-R，-r，–recursive：递归地复制文件</li>
+<li>-f，–force：如果有一个已存在且无法打开的目标文件，将其删除并重试</li>
+</ul>
+</li>
+<li><p><strong>移动或重命名文件或目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mv</span> [<span class="built_in">source</span>] [destination]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-f，–force：覆盖前不提示</li>
+</ul>
+</li>
+<li><p><strong>改变文件时间戳</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">touch</span> [params] [file]</span><br></pre></td></tr></table></figure>
+
+<p> 将文件的访问时间和修改时间更新为当前时间，除非提供 -c 或 -h 参数，否则程序会在文件不存在时创建一个空文件</p>
+</li>
+</ol>
+<h2 id="文本操作"><a href="#文本操作" class="headerlink" title="文本操作"></a>文本操作</h2><ol>
+<li><p><strong>连接文件并在标准输出上输出</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> [params] filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>类似于 cat ，用于分页阅览文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">more filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>more 的增强版，支持翻页和搜索</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">less filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看文件的开头部分</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">head</span> [params] [file]</span><br></pre></td></tr></table></figure>
+
+<p> 将文件列表中的每个文件的起始10行内容输出至标准输出</p>
+</li>
+<li><p><strong>查看文件的结尾部分</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">tail</span> [params] [file]z</span><br></pre></td></tr></table></figure>
+
+<p> 在标准输出上显示每个文件的最后10行。</p>
+<ul>
+<li>-f，–follow：当文件增长时，输出后续添加的数据</li>
+</ul>
+</li>
+</ol>
+<h2 id="检索和查找"><a href="#检索和查找" class="headerlink" title="检索和查找"></a>检索和查找</h2><ol>
+<li><p><strong>在指定目录下查找文件和目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">find [路径] [匹配条件] [动作]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-name pattern：按照文件名查找，支持使用通配符*和？</li>
+<li>-type type：按照文件类型查找，可以是f（文件），d（目录），l（符号链接）等</li>
+<li>-size [+-]size：按照文件大小查找，+&#x2F;-表示大于或者小于指定大小，单位可以是c（字节），w（字数），d（块数），k（KB），M（MB），G（GB）</li>
+<li>-mtime days：按修改时间查找，+&#x2F;-表示在指定天数前&#x2F;后，days表示天数</li>
+</ul>
+</li>
+<li><p><strong>查找文件中符合条件的内容</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">grep [params] pattern [files]</span><br></pre></td></tr></table></figure>
+
+<p> 在文件 [files] 范围内查找满足条件 pattern 的内容</p>
+<ul>
+<li>-i：忽略大小写</li>
+<li>-n：显示匹配内容的行号</li>
+<li>-r：递归查找子目录中的文件</li>
+</ul>
+</li>
+<li><p><strong>参数传递过滤器，命令组合工具</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">xargs</span><br></pre></td></tr></table></figure>
+
+<p> 给命令传递参数，常用来组合多个命令</p>
+</li>
+<li><p><strong>查找文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">which</span> [file...]</span><br></pre></td></tr></table></figure>
+
+<p> 在环境变量 $PATH 设置的目录里查找符合条件的文件</p>
+</li>
+<li><p><strong>查找文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">whereis [params] [file...]</span><br></pre></td></tr></table></figure>
+
+<p> 用于查找源码，二进制文件或者帮助文件</p>
+<ul>
+<li>-B：查找二进制文件</li>
+<li>-S：查找源码文件</li>
+<li>-M：查找说明文件</li>
+</ul>
+</li>
+</ol>
+<h2 id="用户和权限"><a href="#用户和权限" class="headerlink" title="用户和权限"></a>用户和权限</h2><ol>
+<li><p><strong>创建用户账户</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">useradd [params] username</span><br></pre></td></tr></table></figure>
+
+<p> 用于创建用户，一般使用useradd创建好用户之后，再用passwd设定账户的密码</p>
+</li>
+<li><p><strong>创建或修改密码</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">passwd [username]</span><br></pre></td></tr></table></figure>
+
+<p> 用来设置或更改用户的密码，不输入username则为修改当前用户的密码</p>
+</li>
+<li><p><strong>删除用户账户</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">userdel -r [username]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-r：删除用户目录及其中的所有文件</li>
+</ul>
+</li>
+<li><p><strong>创建用户组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">groupadd [params] [group]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除用户组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">groupdel [group]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示自身用户名称</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">whoami</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改文件权限</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> mode file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改文件的所有者和关联组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chown</span> [params] user[:group] file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改文件的所属群组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chgrp</span> [params] group file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>以管理者的身份执行命令</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">command</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="压缩和解压缩"><a href="#压缩和解压缩" class="headerlink" title="压缩和解压缩"></a>压缩和解压缩</h2><ol>
+<li><p><strong>压缩文件为 tar.gz</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">tar -czvf [archive.tar.gz] [directory]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>压缩&#x2F;解压 tar.gz 文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">gzip [params] [<span class="built_in">dir</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解压 tar.gz 文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">gunzip [params] file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>压缩文件为 zip</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zip [params] file.zip [file...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解压 zip 文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">unzip [params] file.zip</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><ol>
+<li><p><strong>查看进程状态</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ps [params]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-ef：显示所有进程信息</li>
+</ul>
+</li>
+<li><p><strong>杀死进程</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">kill</span> [-s SIGNAL] / [PID]</span><br><span class="line"><span class="comment"># 杀死PID为 20000 的进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 20000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示目录或文件大小</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">du</span> [params] [<span class="built_in">dir</span>/file]</span><br><span class="line"><span class="comment"># 以方便阅读的方式显示当前目录下的所有文件或目录的大小</span></span><br><span class="line"><span class="built_in">du</span> -sh *</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示磁盘空间大小</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">df</span> [params] [file]</span><br><span class="line"><span class="comment"># 以方便阅读的方式显示当前磁盘空间大小</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示内存空余状态</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">free [params] [-s seconds]</span><br><span class="line"><span class="comment"># 每隔10秒以G为单位显示内存使用状况</span></span><br><span class="line">free -g -s 10</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示系统的整体性能信息以及正在运行的进程信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">top [params]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置命令的别名</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> [别名]=[commands]</span><br><span class="line"><span class="comment"># 设置ls启动颜色输出</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&#x27;ls --color=auto&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示当前日期和时间</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">date</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示系统的硬件和操作系统信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">uname</span> -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示系统运行时间和负载</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">uptime</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h2><ol>
+<li><p><strong>显示或配置网络接口</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示网络连接、路由表、接口统计等</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">netstat</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示网络接口和路由信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>测试网络连接</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ping &lt;host&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示 DNS 信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nslookup &lt;host&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="软件管理"><a href="#软件管理" class="headerlink" title="软件管理"></a>软件管理</h2><ol>
+<li><p><strong>更新包索引</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>升级已安装的软件包</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get upgrade</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装新软件包</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install &lt;package&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除软件包</strong></p>
+ <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get remove &lt;package&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="vim-vi操作"><a href="#vim-vi操作" class="headerlink" title="vim&#x2F;vi操作"></a>vim&#x2F;vi操作</h2><h4 id="正常模式"><a href="#正常模式" class="headerlink" title="正常模式"></a>正常模式</h4><ul>
+<li><code>h</code>：光标左移。</li>
+<li><code>j</code>：光标下移。</li>
+<li><code>k</code>：光标上移。</li>
+<li><code>l</code>：光标右移。</li>
+<li><code>w</code>：移动到下一个单词开头。</li>
+<li><code>b</code>：移动到前一个单词开头。</li>
+<li><code>0</code>：移动到行首。</li>
+<li><code>$</code>：移动到行尾。</li>
+<li><code>gg</code>：移动到文件开头。</li>
+<li><code>G</code>：移动到文件结尾。</li>
+<li><code>:n</code>：移动到第n行。</li>
+<li><code>u</code>：撤销。</li>
+<li><code>Ctrl + r</code>：重做。</li>
+</ul>
+<h4 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h4><ul>
+<li><code>i</code>：在光标前插入。</li>
+<li><code>I</code>：在行首插入。</li>
+<li><code>a</code>：在光标后插入。</li>
+<li><code>A</code>：在行尾插入。</li>
+<li><code>o</code>：在当前行下插入新行。</li>
+<li><code>O</code>：在当前行上插入新行。</li>
+<li><code>Esc</code>：返回Normal模式。</li>
+</ul>
+<h4 id="可视模式"><a href="#可视模式" class="headerlink" title="可视模式"></a>可视模式</h4><ul>
+<li><code>v</code>：进入可视模式。</li>
+<li><code>V</code>：进入行可视模式。</li>
+<li><code>Ctrl + v</code>：进入块可视模式。</li>
+<li><code>y</code>：复制选中区域。</li>
+<li><code>d</code>：删除选中区域。</li>
+<li><code>c</code>：更改选中区域。</li>
+</ul>
+<h4 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h4><ul>
+<li><code>:w</code>：保存文件。</li>
+<li><code>:q</code>：退出。</li>
+<li><code>:q!</code>：强制退出不保存。</li>
+<li><code>:wq</code>或<code>:x</code>：保存并退出。</li>
+<li><code>:e filename</code>：打开文件。</li>
+<li><code>:w filename</code>：另存为指定文件。</li>
+<li><code>:set number</code>：显示行号。</li>
+<li><code>:set nonumber</code>：隐藏行号。</li>
+<li><code>:syntax on</code>：开启语法高亮。</li>
+<li><code>:syntax off</code>：关闭语法高亮。</li>
+</ul>
+<h4 id="删除、复制、粘贴"><a href="#删除、复制、粘贴" class="headerlink" title="删除、复制、粘贴"></a>删除、复制、粘贴</h4><ul>
+<li><code>x</code>：删除光标处字符。</li>
+<li><code>dd</code>：删除整行。</li>
+<li><code>ndd</code>：删除游标所在的下面n行</li>
+<li><code>yy</code>：复制整行。</li>
+<li><code>nyy</code>：复制游标所在的下面n行</li>
+<li><code>p</code>：在光标后粘贴。</li>
+<li><code>P</code>：在光标前粘贴。</li>
+</ul>
+<h4 id="搜索与替换"><a href="#搜索与替换" class="headerlink" title="搜索与替换"></a>搜索与替换</h4><ul>
+<li><code>/pattern</code>：向前搜索模式。</li>
+<li><code>?pattern</code>：向后搜索模式。</li>
+<li><code>n</code>：跳到下一个匹配。</li>
+<li><code>N</code>：跳到上一个匹配。</li>
+<li><code>:%s/old/new/g</code>：全文件替换。</li>
+<li><code>:s/old/new/g</code>：当前行替换。</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>MySQL语法</title>
+    <url>/2024/07/12/MySQL%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="使用MySQL"><a href="#使用MySQL" class="headerlink" title="使用MySQL"></a><strong>使用MySQL</strong></h1><ol>
+<li><p>选择数据库。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#USE 数据库名;</span><br><span class="line">USE crashcourse;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示数据库的列表。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SHOW DATABASES;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择数据库后，显示数据库内的表的列表。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SHOW TABLES;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示表列。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SHOW COLUMNS FROM 表名;</span><br><span class="line">SHOW COLUMNS FROM customers;</span><br><span class="line"></span><br><span class="line">#DESCRIBE 表名;</span><br><span class="line">DESCRIBE customers;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="检索数据"><a href="#检索数据" class="headerlink" title="检索数据"></a>检索数据</h1><h2 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h2><ol>
+<li><p>检索单个列。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名;</span><br><span class="line">SELECT prod_name FROM products;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检索多个列。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名，列名，列名。。。 FROM 表名;</span><br><span class="line">SELECT prod_id, prod_name, prod_price FROM products;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检索所有列。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT * FROM 表名;</span><br><span class="line">SELECT * FROM products;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检索不同的行（去掉相同的值）。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT DISTINCT 列名 FROM 表名;</span><br><span class="line">SELECT DISTINCT vend_id FROM products;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>限制结果（为返回第一行或前几行）。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 LIMIT 数字;</span><br><span class="line">SELECT prod_name FROM products LIMIT 5;</span><br><span class="line"></span><br><span class="line">#SELECT 列名 FROM 表名 LIMIT 数字1, 数字2;			//从“数字1”行开始的前“数字2”行</span><br><span class="line">SELECT prod_name FROM products LIMIT 5, 5;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="排序检索数据"><a href="#排序检索数据" class="headerlink" title="排序检索数据"></a>排序检索数据</h1><p><strong>子句（clause）</strong> SQL语句由子句构成，有些子句是必需的，而有的是可选的。</p>
+<h2 id="ORDER-BY子句"><a href="#ORDER-BY子句" class="headerlink" title="ORDER BY子句"></a>ORDER BY子句</h2><ol>
+<li><p>取一个或多个列的名字，据此对输出进行排序。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 ORDER BY 列名;</span><br><span class="line">SELECT prod_name FROM products ORDER BY prod_name;</span><br><span class="line">SELECT prod_id, prod_price, prod_name FROM products ORDER BY prod_price, prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数据排序默认是升序，可以指定DESC关键字进行降序排序。(DESC关键字只应用到直接位于其前面的列名)。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 ORDER BY 列名 DESC;</span><br><span class="line">SELECT prod_id, prod_price, prod_name FROM products ORDER BY prod_price DESC;</span><br><span class="line">SELECT prod_id, prod_price, prod_name FROM products ORDER BY prod_price DESC, prod_name;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="过滤数据"><a href="#过滤数据" class="headerlink" title="过滤数据"></a>过滤数据</h1><h2 id="WHERE子句"><a href="#WHERE子句" class="headerlink" title="WHERE子句"></a>WHERE子句</h2><p>通常只会根据特定操作或报告的需要提取表数据的子集。只检索所需数据需要指定搜索条件。<br>在同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">=			等于</span><br><span class="line">&lt;&gt;			不等于</span><br><span class="line">!=			不等于</span><br><span class="line">&lt;			小于</span><br><span class="line">&lt;=			小于等于</span><br><span class="line">&gt;			大于</span><br><span class="line">&gt;=			大于等于</span><br><span class="line">BETWEEN		在指定的两个值之间</span><br><span class="line">*/</span><br><span class="line">#SELECT 列名 FROM 表名 WHERE （条件）;</span><br><span class="line">SELECT prod_name, prod_price FROM products WHERE prod_price = 2.50;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>检查单个值。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 操作符 值;</span><br><span class="line">SELECT prod_name, prod_price FROM products WHERE prod_name = &#x27;fuses&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不匹配检查。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 操作符 值;</span><br><span class="line">SELECT vend_id, prod_name FROM products WHERE vend_id &lt;&gt; 1003;</span><br><span class="line">SELECT vend_id, prod_name FROM products WHERE vend_id != 1003;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>范围值检查(两个值必须用AND关键字分隔)。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 BETWEEN 值1 AND 值2;</span><br><span class="line">SELECT prod_name, prod_price FROM products WHERE prod_price BETWEEN 5 AND 10;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>空值检查。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 IS NULL;</span><br><span class="line">SELECT prod_name FROM products WHERE prod_price IS NULL;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="数据过滤"><a href="#数据过滤" class="headerlink" title="数据过滤"></a>数据过滤</h1><h2 id="组合WHERE子句"><a href="#组合WHERE子句" class="headerlink" title="组合WHERE子句"></a>组合WHERE子句</h2><p>MySQL允许给出多个WHERE子句。这些子句可以两种方式使用：以AND子句的方式或OR子句的方式使用。</p>
+<h2 id="计算次序"><a href="#计算次序" class="headerlink" title="计算次序"></a>计算次序</h2><p>WHERE可包含任意数目的AND和OR操作符。允许两者结合以进行复杂和高级的过滤。<br>AND在计算次序中比OR优先级高，所以任何时候使用具有AND和OR操作符的WHERE子句，都应该使用圆括号明确地分组操作符。</p>
+<ol>
+<li><p>AND操作符。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 条件1 AND 条件2;</span><br><span class="line">SELECT prod_id, prod_price, prod_name FROM products WHERE vend_id = 1003 AND prod_price &lt;= 10;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>OR操作符。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 条件1 OR 条件2;</span><br><span class="line">SELECT prod_name, prod_price FROM products WHERE vend_id = 1002 OR vend_id = 1003;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IN操作符。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">IN操作符和OR操作符相同，但是IN操作符的优点:</span><br><span class="line">1. 在使用长的合法选项清单时，IN操作符的语法更清楚且更直观。</span><br><span class="line">2. 在使用IN时，计算的次序更容易管理。</span><br><span class="line">3. IN操作符一般比OR操作符清单执行更快。</span><br><span class="line">4. 可以包含其他SELECT语句，使得能够更动态地建立WHERE子句。</span><br><span class="line">*/</span><br><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 IN (值1， 值2) ORDER BY 列名;</span><br><span class="line">SELECT prod_name, prod_price FROM products WHERE vend_id IN (1002, 1003) ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>NOT操作符（否定它之后所跟的任何条件）。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 NOT IN (值1， 值2) ORDER BY 列名;</span><br><span class="line">SELECT prod_name, prod_price FROM products WHERE vend_id NOT IN (1002, 1003) ORDER BY prod_name;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="通配符进行过滤"><a href="#通配符进行过滤" class="headerlink" title="通配符进行过滤"></a>通配符进行过滤</h1><h2 id="LIKE操作符"><a href="#LIKE操作符" class="headerlink" title="LIKE操作符"></a>LIKE操作符</h2><p>前面介绍的所有操作符但是针对已知值进行过滤。当搜索产品名中包含文本anvil的所有产品时，可以利用通配符创建比较特定数据的搜索模式。</p>
+<ol>
+<li><p>百分号（%）通配符(在搜索串中，%表示任何字符出现任意次数)。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 LIKE &#x27;%&#x27;;</span><br><span class="line">SELECT prod_id, prod_name FROM products WHERE prod_name LIKE &#x27;jet%&#x27;;</span><br><span class="line">SELECT prod_id, prod_name FROM products WHERE prod_name LIKE &#x27;%anvil%&#x27;;</span><br><span class="line">SELECT prod_id, prod_name FROM products WHERE prod_name LIKE &#x27;s%e&#x27;;			#不推荐</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下划线（_）通配符（只匹配单个字符）。</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 LIKE &#x27;_&#x27;;</span><br><span class="line">SELECT prod_id, prod_name FROM products WHERE prod_name LIKE &#x27;_ ton anvil&#x27;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="用正则表达式进行搜索"><a href="#用正则表达式进行搜索" class="headerlink" title="用正则表达式进行搜索"></a>用正则表达式进行搜索</h1><ol>
+<li><p>基本字符匹配</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#如果被匹配的文本在列值中出现，LIKE将不会找到它，相应的行不会被返回（除非使用通配符），而REGEXP将会找到它，相应的行会被返回。</span><br><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 REGEXP 值 ORDER BY 列名;</span><br><span class="line">SELECT prod_name FROM products WHERE prod_name REGEXP &#x27;1000&#x27; ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进行OR匹配</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 REGEXP &#x27;串1|串2&#x27; ORDER BY 列名;</span><br><span class="line">SELECT prod_name FROM products WHERE prod_name REGEXP &#x27;1000|2000&#x27; ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>匹配几个字符之一（匹配“[]”中的字符之一）</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 REGEXP &#x27;[值1值2值3...] 串&#x27; ORDER BY 列名;</span><br><span class="line">SELECT prod_name FROM products WHERE prod_name REGEXP &#x27;[123] Ton&#x27; ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>匹配范围（匹配“[]”中的“-”两边值和之间的字符之一）</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 REGEXP &#x27;[值1-值2] 串&#x27; ORDER BY 列名;</span><br><span class="line">SELECT prod_name FROM products WHERE prod_name REGEXP &#x27;[1-5] Ton&#x27; ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>匹配特殊字符</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#SELECT 列名 FROM 表名 WHERE 列名 REGEXP &#x27;\\特殊字符&#x27; ORDER BY 列名;</span><br><span class="line">SELECT vend_name FROM vendors WHERE vend_name REGEXP &#x27;\\.&#x27; ORDER BY vend_name;</span><br></pre></td></tr></table></figure>
+
+<h1 id="汇总数据"><a href="#汇总数据" class="headerlink" title="汇总数据"></a>汇总数据</h1><ol>
+<li><p>聚集函数</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">AVG()					返回某列的平均值</span><br><span class="line">COUNT()					返回某列的行数</span><br><span class="line">MAX()					返回某列的最大值</span><br><span class="line">MIN()					返回某列的最小值</span><br><span class="line">SUM()					返回某列值之和</span><br><span class="line">*/</span><br><span class="line">#以上函数对所有行执行计算的话，指定ALL参数或不给参数</span><br><span class="line">SELECT AVG(prod_price) AS avg_price FROM products;</span><br><span class="line">SELECT AVG(prod_price) AS avg_price FROM products WHERE vend_id = 1003;</span><br><span class="line"></span><br><span class="line">SELECT COUNT(*) AS num_cust FROM customers;</span><br><span class="line">SELECT COUNT(cust_email) AS num_cust FROM customers;			#忽略NULL值</span><br><span class="line"></span><br><span class="line">SELECT MAX(prod_price) AS max_price FROM products;</span><br><span class="line"></span><br><span class="line">SELECT MIN(prod_price) AS max_price FROM products;			#忽略NULL值</span><br><span class="line"></span><br><span class="line">SELECT SUM(quantity) AS items_ordered FROM orderitems WHERE order_num = 20005;			#忽略NULL值</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>聚集不同值</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT AVG(DISTINCT prod_price) AS avg_price FROM products WHERE vend_id = 1003;			#只考虑各个不同的价格</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组合聚集函数</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT COUNT(*) AS num_items, </span><br><span class="line">	MIN(prod_price) AS price_min, </span><br><span class="line">	MAX(prod_price) AS price_max, </span><br><span class="line">	AVG(prod_price) AS price_avg </span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="分组函数"><a href="#分组函数" class="headerlink" title="分组函数"></a>分组函数</h1><p> 分组允许把数据分为多个逻辑组，以便能对每个组进行聚集计算。</p>
+<ol>
+<li><p>创建分组（关键字：GROUP BY）</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT vend_id, COUNT(*) AS num_prods FROM products GROUP BY vend_id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>过滤分组（关键字：HAVING）</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_id, COUNT(*) AS orders FROM orders GROUP BY cust_id HAVING COUNT(*) &gt;= 2;</span><br><span class="line">SELECT cust_id, COUNT(*) AS num_prods FROM products WHERE prod_price &gt;= 10 GROUP BY vend_id HAVING COUNT(*) &gt;= 2;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分组和排序</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT order_num, SUM(quantity * item_price) AS ordertotal FROM orderitems </span><br><span class="line">GROUP BY order_num HAVING SUM(quantity * item_price) &gt;= 50;</span><br><span class="line"></span><br><span class="line">SELECT order_num, SUM(quantity * item_price) AS ordertotal FROM orderitems </span><br><span class="line">GROUP BY order_num HAVING SUM(quantity * item_price) &gt;= 50</span><br><span class="line">ORDER BY ordertotal;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SELECT子句顺序</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line">子句						说明							是否必须使用</span><br><span class="line">SELECT					要返回的列或者表达式				是</span><br><span class="line">FROM					从中检索数据的表				仅在从表选择数据时使用</span><br><span class="line">WHERE					行级过滤						否</span><br><span class="line">GROUP BY				分组说明						仅在按组计算聚集时使用</span><br><span class="line">HAVING					组级过滤						否</span><br><span class="line">ORDER BY				输出排序顺序						否</span><br><span class="line">LIMIT					要检索的行数						否</span><br><span class="line">*/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="使用子查询"><a href="#使用子查询" class="headerlink" title="使用子查询"></a>使用子查询</h1><p> 既嵌套在其他查询中的查询</p>
+<ol>
+<li><p>利用子查询进行过滤</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact FROM customers WHERE cust_id IN (</span><br><span class="line">	SELECT cust_id FROM orders WHERE order_num IN (</span><br><span class="line"> 	SELECT order_num FROM orderitems WHERE prod_id = &#x27;TNT2&#x27;));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>作为计算字段使用子查询</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_state, (SELECT COUNT(*) FROM orders WHERE orders.cust_id = customers.cust_id) AS orders</span><br><span class="line">FROM customers ORDER BY cust_name;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="联结"><a href="#联结" class="headerlink" title="联结"></a>联结</h1><p> 通过多个表的共同列值，来把表串起来检索</p>
+<ol>
+<li><p>创建联结</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT vend_name, prod_name, prod_price FROM vendors, products WHERE vendors.vend_id = products.vend.id </span><br><span class="line">ORDER BY vend_name, prod_name;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内部联结</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT vend_name, prod_name, prod_price FROM vendors INNER JOIN products ON vendors.vend_id = products.vend_id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>联结多个表</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT prod_name, vend_name, prod_price, quantity </span><br><span class="line">FROM orderitems, products, vendors WHERE products.vend_id = vendors.vend_id </span><br><span class="line">	AND orderitems.prod_id = products.prod_id </span><br><span class="line">	AND order_num = 20005;</span><br><span class="line">	</span><br><span class="line">SELECT cust_name, cust_contact FROM customers, orders, orderitems WHERE customers.cust_id = orders.cust_id</span><br><span class="line">	AND orderitems.order_num = orders.order_num </span><br><span class="line">	AND prod_id = &#x27;TNT2&#x27;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="创建高级联结"><a href="#创建高级联结" class="headerlink" title="创建高级联结"></a>创建高级联结</h1><ol>
+<li><p>使用表别名</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT cust_name, cust_contact FROM customers AS c, orders AS 0, orderitems AS oi </span><br><span class="line">WHERE c.cust_id = o.cust_id AND oi.order_num = o.order_num AND prod_id = &#x27;TNT2&#x27;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自联结</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">        </span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Nginx</title>
+    <url>/2024/07/12/Nginx/</url>
+    <content><![CDATA[<p>Nginx（发音为”Engine X”）是一款高性能的HTTP服务器和反向代理服务器，同时也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件代理服务器。Nginx以其高并发处理能力、低资源占用和模块化设计而著称，广泛应用于Web服务器、负载均衡、反向代理和静态内容服务等场景。</p>
+<hr>
+<h2 id="Nginx的主要功能"><a href="#Nginx的主要功能" class="headerlink" title="Nginx的主要功能"></a>Nginx的主要功能</h2><ol>
+<li><strong>HTTP服务器</strong>：<ul>
+<li><strong>高性能</strong>：能够处理大量并发连接，适合高流量的网站。</li>
+<li><strong>静态内容处理</strong>：高效提供静态内容，如HTML、CSS、JavaScript、图像等。</li>
+<li><strong>模块化设计</strong>：通过加载不同模块实现额外功能，如Gzip压缩、SSL&#x2F;TLS支持、URL重写等。</li>
+</ul>
+</li>
+<li><strong>反向代理服务器</strong>：<ul>
+<li><strong>负载均衡</strong>：支持多种负载均衡算法，如轮询、最少连接等。</li>
+<li><strong>缓存</strong>：可以缓存后端服务器的响应，提高性能和响应速度。</li>
+<li><strong>健康检查</strong>：自动检测后端服务器的健康状态，剔除故障服务器。</li>
+</ul>
+</li>
+<li><strong>邮件代理服务器</strong>：<ul>
+<li>支持IMAP、POP3和SMTP协议的代理功能。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Nginx的优点"><a href="#Nginx的优点" class="headerlink" title="Nginx的优点"></a>Nginx的优点</h2><ul>
+<li><strong>高并发处理能力</strong>：使用事件驱动的异步非阻塞架构，可以处理大量并发连接。</li>
+<li><strong>低资源占用</strong>：设计精简，内存和CPU使用效率高。</li>
+<li><strong>灵活的配置</strong>：配置文件简洁明了，易于学习和管理。</li>
+<li><strong>模块化设计</strong>：支持动态加载模块，易于扩展和定制。</li>
+</ul>
+<hr>
+<h2 id="Nginx的安装和配置"><a href="#Nginx的安装和配置" class="headerlink" title="Nginx的安装和配置"></a>Nginx的安装和配置</h2><h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><p>在不同操作系统上安装Nginx的方法有所不同：</p>
+<ul>
+<li><p><strong>在Ubuntu&#x2F;Debian上</strong>：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在CentOS&#x2F;RHEL上</strong>：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在MacOS上</strong>：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="启动和管理Nginx"><a href="#启动和管理Nginx" class="headerlink" title="启动和管理Nginx"></a>启动和管理Nginx</h3><ul>
+<li><p><strong>启动Nginx</strong>：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>停止Nginx</strong>：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl stop nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重启Nginx</strong>：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查Nginx状态</strong>：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl status nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>优雅停止</strong></p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -s quit</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>立即停止</strong></p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -s stop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重载配置文件</strong></p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -s reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重新打开日志文件</strong></p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -s reopen</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看Nginx版本</strong></p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nginx -V</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>测试 Nginx 配置文件的语法和有效性</strong></p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Nginx-配置文件位置"><a href="#Nginx-配置文件位置" class="headerlink" title="Nginx 配置文件位置"></a>Nginx 配置文件位置</h3><p>通过查看Nginx版本的命令，可以看到Nginx的安装目录，编译参数以及配置文件和日志文件的位置等各种信息</p>
+<p>默认情况下，Nginx 的主配置文件位于 <code>/etc/nginx/nginx.conf</code>。在该文件中，可以配置全局设置、事件、HTTP 服务和邮件代理。</p>
+<h3 id="Nginx-日志文件位置"><a href="#Nginx-日志文件位置" class="headerlink" title="Nginx 日志文件位置"></a>Nginx 日志文件位置</h3><p>默认情况下，Nginx 的日志文件位于 <code>/var/log/nginx/</code> 目录中，主要有两个日志文件：</p>
+<ul>
+<li><code>access.log</code>：记录所有的请求信息。</li>
+<li><code>error.log</code>：记录所有的错误信息。</li>
+</ul>
+<h3 id="基本配置结构"><a href="#基本配置结构" class="headerlink" title="基本配置结构"></a>基本配置结构</h3><p>Nginx 配置文件由多个块（block）组成，主要包括全局块、events 块和 http 块。http 块中可以包含 server 块，而 server 块中可以包含 location 块。</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 全局配置</span></span><br><span class="line"><span class="attribute">user</span> www-data;</span><br><span class="line"><span class="attribute">worker_processes</span> auto;</span><br><span class="line"><span class="attribute">pid</span> /run/nginx.pid;</span><br><span class="line"><span class="attribute">include</span> /etc/nginx/modules-enabled/<span class="regexp">*.conf</span>;</span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">tcp_nopush</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">tcp_nodelay</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line">    <span class="attribute">types_hash_max_size</span> <span class="number">2048</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/mime.types;</span><br><span class="line">    <span class="attribute">default_type</span> application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 日志格式</span></span><br><span class="line">    <span class="attribute">log_format</span> main <span class="string">&#x27;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &quot;<span class="variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">access_log</span> /var/log/nginx/access.log main;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Gzip 压缩</span></span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_disable</span> <span class="string">&quot;msie6&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 虚拟主机配置</span></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/sites-enabled/*;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h4><ul>
+<li><code>user</code>：指定 Nginx 进程运行的用户和组。</li>
+<li><code>worker_processes</code>：指定 Nginx 使用的工作进程数。通常设置为 CPU 核心数。</li>
+<li><code>pid</code>：指定存储 Nginx 主进程 ID 的文件路径。</li>
+<li><code>include</code>：包含其他配置文件。</li>
+</ul>
+<h4 id="events-块"><a href="#events-块" class="headerlink" title="events 块"></a>events 块</h4><ul>
+<li><code>worker_connections</code>：每个工作进程允许的最大连接数。</li>
+</ul>
+<h4 id="http-块"><a href="#http-块" class="headerlink" title="http 块"></a>http 块</h4><ul>
+<li><code>sendfile</code>：启用高效文件传输。</li>
+<li><code>tcp_nopush</code> 和 <code>tcp_nodelay</code>：优化 TCP 数据传输。</li>
+<li><code>keepalive_timeout</code>：保持连接的超时时间。</li>
+<li><code>types_hash_max_size</code>：MIME 类型哈希表的最大大小。</li>
+<li><code>include</code>：包含其他配置文件（如 MIME 类型文件）。</li>
+<li><code>default_type</code>：默认的 MIME 类型。</li>
+<li><code>log_format</code>：定义日志格式。</li>
+<li><code>access_log</code>：指定访问日志文件路径和格式。</li>
+<li><code>gzip</code> 和 <code>gzip_disable</code>：启用和禁用 Gzip 压缩。</li>
+</ul>
+<h4 id="server-块"><a href="#server-块" class="headerlink" title="server 块"></a>server 块</h4><p><code>server</code> 块定义了虚拟主机的配置，通常包含在 <code>/etc/nginx/sites-available/</code> 或 <code>/etc/nginx/sites-enabled/</code> 中。每个 server 块表示一个虚拟主机。</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com www.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /var/www/html;</span><br><span class="line">    <span class="attribute">index</span> index.html index.htm;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">access_log</span> /var/log/nginx/example.com.access.log;</span><br><span class="line">    <span class="attribute">error_log</span> /var/log/nginx/example.com.<span class="literal">error</span>.log;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> /images/ &#123;</span><br><span class="line">        <span class="attribute">autoindex</span> <span class="literal">on</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> /api/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:3000;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">    <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>listen</code>：指定监听的端口号。</li>
+<li><code>server_name</code>：指定虚拟主机的域名。</li>
+<li><code>root</code>：指定根目录。</li>
+<li><code>index</code>：指定默认的索引文件。</li>
+<li><code>access_log</code> 和 <code>error_log</code>：指定访问日志和错误日志文件路径。</li>
+</ul>
+<h4 id="location-块"><a href="#location-块" class="headerlink" title="location 块"></a>location 块</h4><p><code>location</code> 块用于匹配 URI，可以用来提供静态文件、代理请求等。</p>
+<ul>
+<li><code>location /</code>：匹配根目录的请求。</li>
+<li><code>try_files</code>：尝试按照顺序访问文件或返回错误。</li>
+<li><code>autoindex</code>：启用目录列表。</li>
+<li><code>proxy_pass</code>：代理请求到后端服务器。</li>
+<li><code>proxy_set_header</code>：设置代理请求头。</li>
+</ul>
+<h4 id="SSL-配置示例"><a href="#SSL-配置示例" class="headerlink" title="SSL 配置示例"></a>SSL 配置示例</h4><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/ssl/certs/example.com.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/ssl/private/example.com.key;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> HIGH:!aNULL:!MD5;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /var/www/html;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>ssl_certificate</code> 和 <code>ssl_certificate_key</code>：指定 SSL 证书和密钥文件路径。</li>
+<li><code>ssl_protocols</code>：指定使用的 SSL&#x2F;TLS 协议。</li>
+<li><code>ssl_ciphers</code>：指定使用的加密套件。</li>
+</ul>
+<h2 id="Nginx的进程模型"><a href="#Nginx的进程模型" class="headerlink" title="Nginx的进程模型"></a>Nginx的进程模型</h2><p>Nginx 的进程模型基于事件驱动和异步非阻塞架构，这使其能够高效地处理大量并发连接。Nginx 使用多进程模型，其中包括一个主进程和多个工作进程。下面是 Nginx 进程模型的详细说明：</p>
+<h3 id="1-主进程-Master-Process"><a href="#1-主进程-Master-Process" class="headerlink" title="1. 主进程 (Master Process)"></a>1. 主进程 (Master Process)</h3><p>主进程的主要职责是：</p>
+<ul>
+<li><strong>读取和验证配置文件</strong>：当 Nginx 启动或配置文件发生更改时，主进程会读取并验证配置文件。</li>
+<li><strong>管理工作进程</strong>：主进程负责生成、监控和管理工作进程。它会在工作进程终止或崩溃时重新启动新的工作进程。</li>
+<li><strong>处理信号</strong>：主进程接收并处理外部信号，如启动、停止、重启和重新加载配置等。</li>
+</ul>
+<p>主进程不处理实际的网络请求，其作用更多是管理和控制。</p>
+<h3 id="2-工作进程-Worker-Processes"><a href="#2-工作进程-Worker-Processes" class="headerlink" title="2. 工作进程 (Worker Processes)"></a>2. 工作进程 (Worker Processes)</h3><p>工作进程的主要职责是处理实际的客户端请求。每个工作进程是独立的，且互相之间没有直接通信。具体来说，工作进程的任务包括：</p>
+<ul>
+<li><strong>接受和处理客户端请求</strong>：包括HTTP请求、反向代理请求、负载均衡请求等。</li>
+<li><strong>与后端服务器通信</strong>：如果配置了反向代理或负载均衡，工作进程会与后端服务器通信以获取数据。</li>
+<li><strong>处理静态文件和动态内容</strong>：提供静态文件服务，或者将请求转发给后端应用服务器处理动态内容。</li>
+</ul>
+<h3 id="3-事件驱动模型"><a href="#3-事件驱动模型" class="headerlink" title="3. 事件驱动模型"></a>3. 事件驱动模型</h3><p>Nginx 使用基于事件的模型来处理请求。这个模型使用了操作系统提供的高效I&#x2F;O多路复用机制，如<code>epoll</code>（在Linux上）、<code>kqueue</code>（在BSD系统上）等。其工作原理如下：</p>
+<ul>
+<li><strong>非阻塞I&#x2F;O</strong>：所有I&#x2F;O操作（如读写请求）都是非阻塞的。这意味着一个操作不会因为等待数据而阻塞整个进程。</li>
+<li><strong>事件循环</strong>：每个工作进程运行一个事件循环，不断地检查和处理各种事件（如新的连接、读写数据等）。</li>
+<li><strong>事件通知</strong>：当有新的事件（如新的连接请求或数据到达）时，操作系统会通知Nginx的工作进程，工作进程会立即处理这些事件。</li>
+</ul>
+<h3 id="4-进程数配置"><a href="#4-进程数配置" class="headerlink" title="4. 进程数配置"></a>4. 进程数配置</h3><p>Nginx 的工作进程数可以在配置文件中设置，通常设置为与 CPU 核心数相同，以充分利用多核处理器的能力。可以在配置文件 <code>/etc/nginx/nginx.conf</code> 中通过以下指令设置：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">worker_processes</span> auto;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>auto</code> 选项可以让 Nginx 自动检测并设置为与 CPU 核心数相同的工作进程数。</p>
+<h3 id="5-处理模型示例"><a href="#5-处理模型示例" class="headerlink" title="5. 处理模型示例"></a>5. 处理模型示例</h3><p>以下是 Nginx 处理请求的简化流程：</p>
+<ol>
+<li><strong>客户端请求</strong>：客户端发送请求到服务器，操作系统将请求传递给Nginx。</li>
+<li><strong>主进程分发</strong>：主进程监听端口，接收请求，并将其分发给工作进程。</li>
+<li><strong>工作进程处理</strong>：工作进程处理请求，执行读写操作、与后端服务器通信等。</li>
+<li><strong>响应客户端</strong>：工作进程将处理结果（如网页内容、API响应等）返回给客户端。</li>
+</ol>
+<h3 id="6-进程管理和信号控制"><a href="#6-进程管理和信号控制" class="headerlink" title="6. 进程管理和信号控制"></a>6. 进程管理和信号控制</h3><p>Nginx 的主进程通过信号控制工作进程的生命周期。例如：</p>
+<ul>
+<li><p>启动&#x2F;停止Nginx</p>
+<p>  ：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"><span class="built_in">sudo</span> systemctl stop nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新加载配置</p>
+<p>  （不停止服务）：</p>
+  <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>平滑升级</strong>（不中断服务地升级Nginx）： 主进程会先启动新的工作进程，然后逐步关闭旧的工作进程，以保证服务不中断。</p>
+</li>
+</ul>
+<p>通过这种多进程和事件驱动模型，Nginx 实现了高并发处理能力和高性能，同时保持了资源使用的高效性。</p>
+<hr>
+<h2 id="常见用途"><a href="#常见用途" class="headerlink" title="常见用途"></a>常见用途</h2><ol>
+<li><strong>静态文件服务</strong>：用于提供HTML、CSS、JavaScript、图像等静态资源。</li>
+<li><strong>反向代理和负载均衡</strong>：将请求转发到后端服务器，分担负载，提高系统的可用性和性能。</li>
+<li><strong>缓存服务器</strong>：缓存后端服务器的响应，减少后端负载，提高响应速度。</li>
+<li><strong>SSL&#x2F;TLS终止</strong>：处理HTTPS请求，卸载SSL&#x2F;TLS加密工作。</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>磁盘阵列</title>
+    <url>/2024/07/12/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97/</url>
+    <content><![CDATA[<p>在单机时代，采用单块磁盘进行数据存储和读写的方式，由于寻址和读写的时间消耗，导致I&#x2F;O性能非常低，且存储容量还会受到限制。另外，单块磁盘极其容易出现物理故障，经常导致数据的丢失。</p>
+<h2 id="RAID"><a href="#RAID" class="headerlink" title="RAID"></a>RAID</h2><p>RAID （ Redundant Array of Independent Disks ）即独立磁盘冗余阵列，简称为磁盘阵列，其实就是用多个独立的磁盘组成在一起形成一个大的磁盘系统，从而实现比单块磁盘更好的存储性能和更高的可靠性。</p>
+<h3 id="RAID-0"><a href="#RAID-0" class="headerlink" title="RAID 0"></a>RAID 0</h3><p>工作原理它将N块磁盘组合在一起形成一个大容量的存储。当我们要写数据的时候，会将数据分为N份，以独立的方式实现N块磁盘的读写，那么这N份数据会同时并发的写到磁盘中，因此执行性能非常的高。</p>
+<p>RAID 0 的读写性能理论上是单块磁盘的N倍（仅限理论，因为实际中磁盘的寻址时间也是性能占用的大头）<br>但RAID 0的问题是，它并不提供数据校验或冗余备份，因此一旦某块磁盘损坏了，数据就直接丢失，无法恢复了。因此RAID0就不可能用于高要求的业务中，但可以用在对可靠性要求不高，对读写性能要求高的场景中。</p>
+<h3 id="RAID-1"><a href="#RAID-1" class="headerlink" title="RAID 1"></a>RAID 1</h3><p>工作原理是在往磁盘写数据的时候，将同一份数据无差别的写两份到磁盘，分别写到工作磁盘和镜像磁盘，那么它的实际空间使用率只有50%了，两块磁盘当做一块用，这是一种比较昂贵的方案。</p>
+<p>RAID 1其实与RAID0效果刚好相反。RAID 1这种写双份的做法，就给数据做了一个冗余备份。这样的话，任何一块磁盘损坏了，都可以再基于另外一块磁盘去恢复数据，数据的可靠性非常强，但性能就没那么好了。</p>
+<h3 id="RAID-2"><a href="#RAID-2" class="headerlink" title="RAID 2"></a>RAID 2</h3><p>一种利用海明码校验的阵列。主要目的是在RAID 0的基础上增加数据纠错能力。<br>RAID 2其数据的第2的n次方为校验文件。</p>
+<p>假如要存储一个八位编码的数据，那1，2，4，8磁盘里是校验码，而3，5，6，7，9，10，11磁盘是存放数据的。</p>
+<p>所以编码数据位数越少磁盘利用率越低，由于写入和读取时还需要计算校验码，所以实际上性能开销比较大。</p>
+<h3 id="RAID-3"><a href="#RAID-3" class="headerlink" title="RAID 3"></a>RAID 3</h3><p>带奇偶校验码的并行传送，这种校验码与RAID2不同，只能查错不能纠错。它像RAID 0一样以并行的方式来存放数，但速度没有RAID 0快。校验码在写入数据时产生并保存在另一个磁盘上。需要实现时用户必须要有三个以上的驱动器，写入速率与读出速率都很高，因为校验位比较少，因此计算时间相对而言比较少，RAID 3使用单块磁盘存放奇偶校验信息。如果一块磁盘失效，奇偶盘及其他数据盘可以重新产生数据。 如果奇偶盘失效，则不影响数据使用。</p>
+<h3 id="RAID-4"><a href="#RAID-4" class="headerlink" title="RAID 4"></a>RAID 4</h3><p>RAID 4和RAID 3很像，不同的是，它对数据的访问是按数据块进行的，也就是按磁盘进行的，每次是一个盘。它的特点的RAID 3也挺像，不过在失败恢复时，它的难度可要比RAID3大得多了，控制器的设计难度也要大许多，而且访问数据的效率不怎么好。</p>
+<h3 id="RAID-5"><a href="#RAID-5" class="headerlink" title="RAID 5"></a>RAID 5</h3><p>通过数据条带化和奇偶校验（parity）相结合的方式，将数据分布在多个磁盘上，并在每个磁盘上存储奇偶校验信息。RAID 5允许在一个磁盘发生故障时继续工作，通过使用校验信息可以恢复并重建丢失的数据。RAID 5的写入性能相对较低，因为写入数据时需要进行奇偶校验计算。RAID 5适用于需要高性能和一定数据安全性的应用程序，如文件共享和电子邮件服务器。</p>
+<h3 id="RAID-6"><a href="#RAID-6" class="headerlink" title="RAID 6"></a>RAID 6</h3><p>在RAID 5的基础上增加了第二个独立的奇偶校验信息块，允许在两个磁盘同时发生故障时仍能保持数据的完整性。RAID 6的读取性能与RAID 5相似，但由于需要计算额外的奇偶校验数据，写入性能更低。RAID 6适用于对数据安全性要求极高的场合，如大型企业的核心数据存储。</p>
+<h3 id="RAID-7"><a href="#RAID-7" class="headerlink" title="RAID 7"></a>RAID 7</h3><p>是一种较为特殊的RAID技术，它不仅仅是单纯的硬件RAID，而是一种集成了存储计算机操作系统（Storage Computer Operating System）的存储解决方案。RAID 7的核心思想是通过一套独立的实时操作系统来管理和调度数据传输，使得数据能够高效地在多个硬盘间进行读写操作。RAID 7的设计目标是提供一种高性能、高可靠性的存储方案，尤其适用于那些对数据安全和访问速度要求都非常高的场合。</p>
+<hr>
+<p>RAID除了基础的单个存在之外，还可以嵌套存在。（例如：用4块磁盘，每两块磁盘组成RAID 1，最后再把这两个RAID 1组成一个RAID 0。<br>用9块磁盘，每三块磁盘组成一个RAID 5，然后再把这三个RAID 5组成一个RAID 0。）</p>
+]]></content>
+  </entry>
+</search>

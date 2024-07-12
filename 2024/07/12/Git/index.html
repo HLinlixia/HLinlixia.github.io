@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hlinlixia.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Git 是一种分布式版本控制系统（DVCS），最初由林纳斯·托瓦兹（Linus Torvalds）为管理 Linux 内核开发而创建。Git 是开源的，并且在许多软件开发项目中得到了广泛应用。以下是 Git 的一些关键特性和用途：  Git 的关键特性 分布式： 每个开发者的工作目录都是一个完整的代码库，包含项目的完整历史。这意味着即使没有网络连接，开发者也可以进行代码提交、分支操作等。   高效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git">
+<meta property="og:url" content="https://hlinlixia.github.io/2024/07/12/Git/index.html">
+<meta property="og:site_name" content="Linlixia的博客">
+<meta property="og:description" content="Git 是一种分布式版本控制系统（DVCS），最初由林纳斯·托瓦兹（Linus Torvalds）为管理 Linux 内核开发而创建。Git 是开源的，并且在许多软件开发项目中得到了广泛应用。以下是 Git 的一些关键特性和用途：  Git 的关键特性 分布式： 每个开发者的工作目录都是一个完整的代码库，包含项目的完整历史。这意味着即使没有网络连接，开发者也可以进行代码提交、分支操作等。   高效">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-12T11:56:57.000Z">
+<meta property="article:modified_time" content="2024-07-12T12:07:07.244Z">
+<meta property="article:author" content="Linlixia">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hlinlixia.github.io/2024/07/12/Git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Git | Linlixia的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Linlixia的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hlinlixia.github.io/2024/07/12/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Linlixia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Linlixia的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-12 19:56:57 / 修改时间：20:07:07" itemprop="dateCreated datePublished" datetime="2024-07-12T19:56:57+08:00">2024-07-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Git 是一种分布式版本控制系统（DVCS），最初由林纳斯·托瓦兹（Linus Torvalds）为管理 Linux 内核开发而创建。Git 是开源的，并且在许多软件开发项目中得到了广泛应用。以下是 Git 的一些关键特性和用途：</p>
+<hr>
+<h2 id="Git-的关键特性"><a href="#Git-的关键特性" class="headerlink" title="Git 的关键特性"></a>Git 的关键特性</h2><ol>
+<li><strong>分布式</strong>：<ul>
+<li>每个开发者的工作目录都是一个完整的代码库，包含项目的完整历史。这意味着即使没有网络连接，开发者也可以进行代码提交、分支操作等。</li>
+</ul>
+</li>
+<li><strong>高效</strong>：<ul>
+<li>Git 通过数据压缩和差异存储技术，确保了即使是大项目也能高效地管理版本历史。</li>
+</ul>
+</li>
+<li><strong>分支和合并</strong>：<ul>
+<li>Git 提供了强大的分支管理功能，允许开发者轻松创建、合并和删除分支，从而支持并行开发和协作。</li>
+</ul>
+</li>
+<li><strong>数据完整性</strong>：<ul>
+<li>Git 使用 SHA-1 哈希值来唯一标识每个提交，确保了版本历史的完整性和安全性。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Git-的用途"><a href="#Git-的用途" class="headerlink" title="Git 的用途"></a>Git 的用途</h2><ol>
+<li><strong>版本控制</strong>：<ul>
+<li>Git 可以记录项目的每次修改，并允许开发者回滚到之前的版本。这对于代码管理和故障排查非常有用。</li>
+</ul>
+</li>
+<li><strong>协作开发</strong>：<ul>
+<li>Git 支持多人协作开发，每个开发者可以在自己的分支上进行工作，最后合并到主分支。</li>
+</ul>
+</li>
+<li><strong>代码备份</strong>：<ul>
+<li>由于 Git 的分布式特性，每个开发者的本地仓库都是完整的备份，极大地提高了项目的安全性。</li>
+</ul>
+</li>
+<li><strong>代码审查</strong>：<ul>
+<li>Git 支持 Pull Request 和 Code Review，帮助团队成员相互审查代码，提高代码质量。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Git-的工作区域"><a href="#Git-的工作区域" class="headerlink" title="Git 的工作区域"></a>Git 的工作区域</h2><ol>
+<li><strong>工作目录（Working Directory）</strong><ul>
+<li>这是你当前正在工作的目录，其中包含了项目的实际文件。你可以在这里进行文件的添加、修改和删除等操作。</li>
+</ul>
+</li>
+<li><strong>暂存区（Staging Area）</strong><ul>
+<li>暂存区也叫索引（Index），是一个临时存储区域，用于存放将要提交到仓库的文件快照。通过 <code>git add</code> 命令将文件的修改从工作目录添加到暂存区。</li>
+</ul>
+</li>
+<li><strong>本地仓库（Local Repository）</strong><ul>
+<li>本地仓库是你计算机上的一个隐藏目录（<code>.git</code>），其中包含所有的提交历史和对象数据库。通过 <code>git commit</code> 命令将暂存区的内容提交到本地仓库。</li>
+</ul>
+</li>
+<li><strong>远程仓库（Remote Repository）</strong><ul>
+<li>远程仓库是托管在服务器上的 Git 仓库，通常用于与其他开发者协作。通过 <code>git push</code> 和 <code>git pull</code> 命令与远程仓库进行交互。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Git-的文件状态"><a href="#Git-的文件状态" class="headerlink" title="Git 的文件状态"></a>Git 的文件状态</h2><p>在 Git 中，文件可以处于以下四种状态之一：</p>
+<ol>
+<li><strong>未跟踪（Untracked）</strong><ul>
+<li>文件在工作目录中，但没有被 Git 跟踪。即，文件还没有添加到暂存区。</li>
+</ul>
+</li>
+<li><strong>已跟踪（Tracked）</strong><ul>
+<li>文件已经被 Git 跟踪，可能处于已修改、已暂存或未修改状态。<ul>
+<li><strong>未修改（Unmodified）</strong>：文件没有任何改动。</li>
+<li><strong>已修改（Modified）</strong>：文件有改动，但尚未添加到暂存区。</li>
+<li><strong>已暂存（Staged）</strong>：文件的改动已经添加到暂存区，等待提交。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Git-的基本使用方式"><a href="#Git-的基本使用方式" class="headerlink" title="Git 的基本使用方式"></a>Git 的基本使用方式</h2><h3 id="1-设置-Git"><a href="#1-设置-Git" class="headerlink" title="1. 设置 Git"></a>1. 设置 Git</h3><h4 id="配置用户信息"><a href="#配置用户信息" class="headerlink" title="配置用户信息"></a>配置用户信息</h4><p>在使用 Git 之前，首先需要配置用户信息，这些信息会记录在你的提交中。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置用户名</span></span><br><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line"><span class="comment">#配置邮箱</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your.email@example.com&quot;</span></span><br><span class="line"><span class="comment">#存储配置</span></span><br><span class="line">git config --global credential.helper store</span><br></pre></td></tr></table></figure>
+
+<h4 id="检查配置"><a href="#检查配置" class="headerlink" title="检查配置"></a>检查配置</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建和管理仓库"><a href="#2-创建和管理仓库" class="headerlink" title="2. 创建和管理仓库"></a>2. 创建和管理仓库</h3><h4 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h4><p>在一个新的或现有的目录中初始化一个 Git 仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/your/project</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<h4 id="克隆现有仓库"><a href="#克隆现有仓库" class="headerlink" title="克隆现有仓库"></a>克隆现有仓库</h4><p>从远程仓库克隆：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;url&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-添加和提交"><a href="#3-添加和提交" class="headerlink" title="3. 添加和提交"></a>3. 添加和提交</h3><h4 id="添加文件到暂存区"><a href="#添加文件到暂存区" class="headerlink" title="添加文件到暂存区"></a>添加文件到暂存区</h4><p>将文件添加到暂存区（准备提交）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file&gt;</span><br><span class="line"><span class="comment"># 或者添加所有变化的文件</span></span><br><span class="line">git add .</span><br></pre></td></tr></table></figure>
+
+<h4 id="提交更改"><a href="#提交更改" class="headerlink" title="提交更改"></a>提交更改</h4><p>将暂存区中的文件提交到本地仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;描述你的更改&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-查看状态或差异"><a href="#4-查看状态或差异" class="headerlink" title="4.查看状态或差异"></a>4.查看状态或差异</h3><h4 id="查看仓库状态"><a href="#查看仓库状态" class="headerlink" title="查看仓库状态"></a>查看仓库状态</h4><p>查看当前仓库的状态，包括未跟踪的文件、未提交的更改等：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h4><p>查看提交日志：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br><span class="line"><span class="comment">#--oneline表示简略模式</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br></pre></td></tr></table></figure>
+
+<h4 id="比较文件差异"><a href="#比较文件差异" class="headerlink" title="比较文件差异"></a>比较文件差异</h4><p>比较工作目录和暂存区之间的差异：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+
+<p>比较暂存区和最新提交之间的差异：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure>
+
+<p>比较工作目录和最新提交之间的差异：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br></pre></td></tr></table></figure>
+
+<p>比较两个提交之间的差异</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff &lt;commit1&gt; &lt;commit2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>比较分支之间的差异</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff &lt;branch1&gt; &lt;branch2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-分支管理"><a href="#5-分支管理" class="headerlink" title="5. 分支管理"></a>5. 分支管理</h3><h4 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h4><p>创建一个新分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h4><p>切换到指定分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在较新的 Git 版本中，可以用 <code>git switch</code> 命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建并切换分支"><a href="#创建并切换分支" class="headerlink" title="创建并切换分支"></a>创建并切换分支</h4><p>创建一个新分支并立即切换到该分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>git switch</code> 命令的等效操作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch -c &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h4><p>查看所有本地分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p>查看所有远程分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+
+<p>查看所有分支（包括本地和远程）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<h4 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h4><p>将指定分支合并到当前分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><p>删除一个已经合并的分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>删除一个分支，不管是否合并：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-远程仓库"><a href="#6-远程仓库" class="headerlink" title="6. 远程仓库"></a>6. 远程仓库</h3><h4 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h4><p>添加远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;remote-name&gt; &lt;remote-url&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看远程仓库"><a href="#查看远程仓库" class="headerlink" title="查看远程仓库"></a>查看远程仓库</h4><p>查看配置的远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除远程仓库"><a href="#删除远程仓库" class="headerlink" title="删除远程仓库"></a>删除远程仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">rm</span> &lt;remote-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重命名远程仓库"><a href="#重命名远程仓库" class="headerlink" title="重命名远程仓库"></a>重命名远程仓库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote rename &lt;old-name&gt; &lt;new-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="推送更改到远程仓库"><a href="#推送更改到远程仓库" class="headerlink" title="推送更改到远程仓库"></a>推送更改到远程仓库</h4><p>推送当前分支到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote-name&gt; &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>推送所有分支到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --all origin</span><br></pre></td></tr></table></figure>
+
+<h4 id="拉取远程仓库的更改"><a href="#拉取远程仓库的更改" class="headerlink" title="拉取远程仓库的更改"></a>拉取远程仓库的更改</h4><p>从远程仓库拉取.默认拉取远程仓库名origin的master或者main分支</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull &lt;remote-name&gt; &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将本地改动的代码rebase到远程仓库的最新代码上</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取远程仓库的更改（不合并）"><a href="#获取远程仓库的更改（不合并）" class="headerlink" title="获取远程仓库的更改（不合并）"></a>获取远程仓库的更改（不合并）</h4><p>获取远程仓库的最新更改，但不合并：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch &lt;remote-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-标签管理"><a href="#7-标签管理" class="headerlink" title="7. 标签管理"></a>7. 标签管理</h3><h4 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h4><p>创建一个轻量级标签：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag tag-name</span><br></pre></td></tr></table></figure>
+
+<p>创建一个带注释的标签：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a tag-name -m <span class="string">&quot;描述标签&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看标签"><a href="#查看标签" class="headerlink" title="查看标签"></a>查看标签</h4><p>查看所有标签：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+
+<h4 id="推送标签到远程仓库"><a href="#推送标签到远程仓库" class="headerlink" title="推送标签到远程仓库"></a>推送标签到远程仓库</h4><p>推送单个标签到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin tag-name</span><br></pre></td></tr></table></figure>
+
+<p>推送所有标签到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-撤销和恢复"><a href="#8-撤销和恢复" class="headerlink" title="8. 撤销和恢复"></a>8. 撤销和恢复</h3><h4 id="移动一个文件到新的位置"><a href="#移动一个文件到新的位置" class="headerlink" title="移动一个文件到新的位置"></a>移动一个文件到新的位置</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">mv</span> &lt;file&gt; &lt;new-file&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除一个文件"><a href="#删除一个文件" class="headerlink" title="删除一个文件"></a>删除一个文件</h4><p>从工作区和暂存区删除一个文件，并且将这次删除放入暂存区</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从暂存区删除文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="恢复一个文件到之前的版本"><a href="#恢复一个文件到之前的版本" class="headerlink" title="恢复一个文件到之前的版本"></a>恢复一个文件到之前的版本</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;file&gt; &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建一个新的提交，用来撤销指定的提交"><a href="#创建一个新的提交，用来撤销指定的提交" class="headerlink" title="创建一个新的提交，用来撤销指定的提交"></a>创建一个新的提交，用来撤销指定的提交</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="用于重置当前分支的-HEAD-到指定提交，并根据需要更改暂存区和工作目录。"><a href="#用于重置当前分支的-HEAD-到指定提交，并根据需要更改暂存区和工作目录。" class="headerlink" title="用于重置当前分支的 HEAD 到指定提交，并根据需要更改暂存区和工作目录。"></a>用于重置当前分支的 HEAD 到指定提交，并根据需要更改暂存区和工作目录。</h4><p>软重置（仅重置 HEAD，保留暂存区和工作目录的更改）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<p>混合重置（重置 HEAD 和暂存区，保留工作目录的更改）这是默认模式。：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --mixed &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<p>硬重置（重置 HEAD、暂存区和工作目录，丢弃所有更改）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard &lt;commit-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="撤销暂存区的文件，重新放回工作区"><a href="#撤销暂存区的文件，重新放回工作区" class="headerlink" title="撤销暂存区的文件，重新放回工作区"></a>撤销暂存区的文件，重新放回工作区</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git restore --staged &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="特殊文件"><a href="#特殊文件" class="headerlink" title="特殊文件"></a>特殊文件</h2><p>在 Git 中，有一些特殊文件用于配置、忽略文件、处理钩子等。这些文件有助于管理和自定义 Git 仓库的行为。以下是一些常见的 Git 特殊文件及其用途：</p>
+<h3 id="1-gitignore"><a href="#1-gitignore" class="headerlink" title="1. .gitignore"></a>1. <code>.gitignore</code></h3><p><code>.gitignore</code> 文件用于指定应被 Git 忽略的文件或目录。Git 在将文件添加到版本控制中时，会参考 <code>.gitignore</code> 文件中的规则。</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 忽略所有 .log 文件</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># 忽略名为 tmp 的目录</span><br><span class="line">tmp/</span><br><span class="line"></span><br><span class="line"># 忽略所有 .tmp 文件，除了 special.tmp</span><br><span class="line">*.tmp</span><br><span class="line">!special.tmp</span><br><span class="line"></span><br><span class="line"># 忽略 node_modules 目录</span><br><span class="line">node_modules/</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-gitattributes"><a href="#2-gitattributes" class="headerlink" title="2. .gitattributes"></a>2. <code>.gitattributes</code></h3><p><code>.gitattributes</code> 文件用于定义文件的属性。这些属性可以用于文本文件的行尾转换、差异化算法等。</p>
+<h4 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 设置所有 .sh 文件为可执行文件</span><br><span class="line">*.sh export-ignore</span><br><span class="line"></span><br><span class="line"># 将所有 .jpg 文件标记为二进制文件</span><br><span class="line">*.jpg binary</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-gitkeep"><a href="#3-gitkeep" class="headerlink" title="3. .gitkeep"></a>3. <code>.gitkeep</code></h3><p><code>.gitkeep</code> 并不是 Git 官方定义的特殊文件，但它是社区广泛使用的约定，用于确保空目录被保留在 Git 仓库中。Git 默认不跟踪空目录，因此可以在空目录中添加一个 <code>.gitkeep</code> 文件以确保其存在。</p>
+<h4 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个空目录并添加 .gitkeep 文件</span></span><br><span class="line"><span class="built_in">mkdir</span> empty_directory</span><br><span class="line"><span class="built_in">touch</span> empty_directory/.gitkeep</span><br><span class="line">git add empty_directory/.gitkeep</span><br><span class="line">git commit -m <span class="string">&quot;Add .gitkeep to keep empty directory&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-gitmodules"><a href="#4-gitmodules" class="headerlink" title="4. .gitmodules"></a>4. <code>.gitmodules</code></h3><p><code>.gitmodules</code> 文件用于定义子模块。子模块是一个嵌入到另一个 Git 仓库中的外部 Git 仓库。</p>
+<h4 id="示例：-3"><a href="#示例：-3" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[submodule &quot;path/to/submodule&quot;]</span><br><span class="line">    path = path/to/submodule</span><br><span class="line">    url = https://github.com/user/repo.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-git-config"><a href="#5-git-config" class="headerlink" title="5. .git/config"></a>5. <code>.git/config</code></h3><p><code>.git/config</code> 文件存储了仓库级别的配置设置。你可以通过 <code>git config</code> 命令来修改这些设置。</p>
+<h4 id="示例：-4"><a href="#示例：-4" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">    repositoryformatversion = 0</span><br><span class="line">    filemode = true</span><br><span class="line">    bare = false</span><br><span class="line">    logallrefupdates = true</span><br><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">    url = https://github.com/user/repo.git</span><br><span class="line">    fetch = +refs/heads/*:refs/remotes/origin/*</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-mailmap"><a href="#6-mailmap" class="headerlink" title="6. .mailmap"></a>6. <code>.mailmap</code></h3><p><code>.mailmap</code> 文件用于规范化提交历史中的作者和提交者信息，解决同一作者使用多个名字或邮件地址的问题。</p>
+<h4 id="示例：-5"><a href="#示例：-5" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 规范化作者信息</span><br><span class="line">Correct Name &lt;correct.email@example.com&gt; &lt;incorrect.email@example.com&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-Git-Hook-文件"><a href="#7-Git-Hook-文件" class="headerlink" title="7. Git Hook 文件"></a>7. Git Hook 文件</h3><p>Git Hook 是存储在 <code>.git/hooks</code> 目录中的脚本文件，它们在 Git 仓库中触发各种事件时执行。常见的 Hook 文件包括：</p>
+<ul>
+<li><code>pre-commit</code>：在执行 <code>git commit</code> 之前运行。</li>
+<li><code>commit-msg</code>：在提交信息编辑完成后、提交保存之前运行。</li>
+<li><code>post-commit</code>：在提交完成后运行。</li>
+<li><code>pre-receive</code>：在接收到推送之前运行（在服务器端）。</li>
+<li><code>post-receive</code>：在接收到推送之后运行（在服务器端）。</li>
+</ul>
+<h4 id="示例：-6"><a href="#示例：-6" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .git/hooks/pre-commit</span></span><br><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 检查是否有未格式化的代码</span></span><br><span class="line"><span class="keyword">if</span> git diff --cached | grep -q <span class="string">&#x27;^[+-]&#x27;</span>; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Commit rejected: Please format your code before committing.&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="Git的高级特性"><a href="#Git的高级特性" class="headerlink" title="Git的高级特性"></a>Git的高级特性</h2><p>Git 不仅提供了基本的版本控制功能，还拥有许多高级特性，这些特性可以帮助你在复杂的开发场景中更好地管理代码和协作。以下是一些 Git 的高级特性及其使用方法：</p>
+<h3 id="1-交互式暂存（Interactive-Staging）"><a href="#1-交互式暂存（Interactive-Staging）" class="headerlink" title="1. 交互式暂存（Interactive Staging）"></a>1. 交互式暂存（Interactive Staging）</h3><p>交互式暂存允许你选择性地暂存文件的某些部分而不是整个文件。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -p</span><br></pre></td></tr></table></figure>
+
+<p>这将会提示你暂存每个变化部分，你可以选择暂存、跳过、分割等操作。</p>
+<h3 id="2-Rebase"><a href="#2-Rebase" class="headerlink" title="2. Rebase"></a>2. Rebase</h3><p><code>git rebase</code> 允许你在保持提交历史整洁的情况下，将一个分支的更改应用到另一个分支之上。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将当前分支的提交应用到指定分支之上</span></span><br><span class="line">git rebase branch-name</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Cherry-Pick"><a href="#3-Cherry-Pick" class="headerlink" title="3. Cherry-Pick"></a>3. Cherry-Pick</h3><p><code>git cherry-pick</code> 允许你从一个分支中选择一个特定的提交并将其应用到当前分支。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将指定提交应用到当前分支</span></span><br><span class="line">git cherry-pick commit-hash</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Stash"><a href="#4-Stash" class="headerlink" title="4. Stash"></a>4. Stash</h3><p><code>git stash</code> 允许你暂时保存当前工作目录的修改，以便在稍后恢复。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存当前修改</span></span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复最近一次的 stash</span></span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有 stash</span></span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复特定的 stash</span></span><br><span class="line">git stash apply stash@&#123;n&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除特定的 stash</span></span><br><span class="line">git stash drop stash@&#123;n&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-子模块（Submodules）"><a href="#5-子模块（Submodules）" class="headerlink" title="5. 子模块（Submodules）"></a>5. 子模块（Submodules）</h3><p>子模块允许你将一个 Git 仓库嵌入到另一个 Git 仓库中，适用于管理依赖项或子项目。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加子模块</span></span><br><span class="line">git submodule add https://github.com/user/repo.git path/to/submodule</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化并更新子模块</span></span><br><span class="line">git submodule update --init --recursive</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新子模块到最新版本</span></span><br><span class="line"><span class="built_in">cd</span> path/to/submodule</span><br><span class="line">git pull origin main</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Subtree"><a href="#6-Subtree" class="headerlink" title="6. Subtree"></a>6. Subtree</h3><p><code>git subtree</code> 是一种将一个仓库的内容合并到另一个仓库中的方法，比子模块更简单一些。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加子树</span></span><br><span class="line">git subtree add --prefix=path/to/subtree https://github.com/user/repo.git main --squash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从子树仓库拉取更新</span></span><br><span class="line">git subtree pull --prefix=path/to/subtree https://github.com/user/repo.git main --squash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送更新到子树仓库</span></span><br><span class="line">git subtree push --prefix=path/to/subtree https://github.com/user/repo.git main</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-重写历史"><a href="#7-重写历史" class="headerlink" title="7. 重写历史"></a>7. 重写历史</h3><p>Git 提供了一些工具来重写提交历史，适用于修改提交信息、合并提交等。</p>
+<h4 id="修改最近一次提交"><a href="#修改最近一次提交" class="headerlink" title="修改最近一次提交"></a>修改最近一次提交</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+
+<h4 id="交互式重写历史"><a href="#交互式重写历史" class="headerlink" title="交互式重写历史"></a>交互式重写历史</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~n</span><br></pre></td></tr></table></figure>
+
+<p>这将会打开一个交互式界面，允许你修改、合并、重排或删除最近的 n 次提交。</p>
+<h3 id="8-Bisect"><a href="#8-Bisect" class="headerlink" title="8. Bisect"></a>8. Bisect</h3><p><code>git bisect</code> 允许你使用二分查找法来定位引入错误的提交。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开始 bisect，指定一个已知良好的提交和一个已知有问题的提交</span></span><br><span class="line">git bisect start</span><br><span class="line">git bisect good known-good-commit</span><br><span class="line">git bisect bad known-bad-commit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据测试结果标记提交</span></span><br><span class="line">git bisect good</span><br><span class="line">git bisect bad</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找到引入错误的提交后，结束 bisect</span></span><br><span class="line">git bisect reset</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Blame"><a href="#9-Blame" class="headerlink" title="9. Blame"></a>9. Blame</h3><p><code>git blame</code> 显示每一行代码的最后修改者和修改时间，有助于代码审查和调试。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git blame filename</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Hooks"><a href="#10-Hooks" class="headerlink" title="10. Hooks"></a>10. Hooks</h3><p>Git 提供了一组钩子（hooks），允许你在特定的 Git 操作前后执行脚本，适用于自动化任务和自定义工作流。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 钩子脚本存放在 .git/hooks 目录中，例如 pre-commit 钩子：</span></span><br><span class="line">.git/hooks/pre-commit</span><br></pre></td></tr></table></figure>
+
+<p>在 pre-commit 脚本中可以编写要在提交之前执行的命令，例如代码格式检查、测试等。</p>
+<h3 id="11-Worktree"><a href="#11-Worktree" class="headerlink" title="11. Worktree"></a>11. Worktree</h3><p><code>git worktree</code> 允许你在同一个仓库中创建多个工作目录，从而能够并行处理多个分支。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个新的工作目录</span></span><br><span class="line">git worktree add /path/to/new-worktree branch-name</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="GitFlow"><a href="#GitFlow" class="headerlink" title="GitFlow"></a>GitFlow</h2><p>GitFlow 是一种 Git 工作流模型，旨在简化团队协作并确保项目的稳定性和有序性。它引入了明确的分支模型，并定义了具体的分支类型和使用方式。GitFlow 由 Vincent Driessen 提出，并已成为许多团队的标准工作流。以下是 GitFlow 的基本概念和操作指南：</p>
+<h3 id="GitFlow-分支模型"><a href="#GitFlow-分支模型" class="headerlink" title="GitFlow 分支模型"></a>GitFlow 分支模型</h3><p>GitFlow 包含以下几种主要分支：</p>
+<ol>
+<li><strong>主分支（master）</strong><ul>
+<li>存放的是已经发布的生产环境代码。每一个提交都是一个新的生产版本。</li>
+</ul>
+</li>
+<li><strong>开发分支（develop）</strong><ul>
+<li>存放最新的开发代码。开发人员在这个分支上进行日常的开发工作。</li>
+</ul>
+</li>
+<li><strong>功能分支（feature）</strong><ul>
+<li>用于开发新功能，从 <code>develop</code> 分支创建，功能开发完成后合并回 <code>develop</code> 分支。</li>
+</ul>
+</li>
+<li><strong>发布分支（release）</strong><ul>
+<li>用于准备新版本的发布。从 <code>develop</code> 分支创建，修复bug和进行版本发布前的准备工作。完成后合并到 <code>master</code> 和 <code>develop</code> 分支，并打上标签。</li>
+</ul>
+</li>
+<li><strong>修补分支（hotfix）</strong><ul>
+<li>用于紧急修复生产环境中的 bug。从 <code>master</code> 分支创建，修复完成后合并回 <code>master</code> 和 <code>develop</code> 分支，并打上标签。</li>
+</ul>
+</li>
+</ol>
+<h3 id="GitFlow-工作流"><a href="#GitFlow-工作流" class="headerlink" title="GitFlow 工作流"></a>GitFlow 工作流</h3><h4 id="1-初始化-GitFlow"><a href="#1-初始化-GitFlow" class="headerlink" title="1. 初始化 GitFlow"></a>1. 初始化 GitFlow</h4><p>在现有的 Git 仓库中初始化 GitFlow：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow init</span><br></pre></td></tr></table></figure>
+
+<p>系统将提示你输入各个分支的名称，通常使用默认设置即可。</p>
+<h4 id="2-功能分支（Feature-Branch）"><a href="#2-功能分支（Feature-Branch）" class="headerlink" title="2. 功能分支（Feature Branch）"></a>2. 功能分支（Feature Branch）</h4><p>功能分支用于开发新功能。通常从 <code>develop</code> 分支创建。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并切换到一个新的功能分支</span></span><br><span class="line">git flow feature start feature-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开发完成后，合并功能分支回 develop 分支并删除该功能分支</span></span><br><span class="line">git flow feature finish feature-name</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-发布分支（Release-Branch）"><a href="#3-发布分支（Release-Branch）" class="headerlink" title="3. 发布分支（Release Branch）"></a>3. 发布分支（Release Branch）</h4><p>发布分支用于准备发布新版本。通常从 <code>develop</code> 分支创建。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并切换到一个新的发布分支</span></span><br><span class="line">git flow release start release-version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以在发布分支上修复 bug 和进行版本准备工作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成发布后，合并发布分支到 master 和 develop 分支，打上标签并删除发布分支</span></span><br><span class="line">git flow release finish release-version</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-修补分支（Hotfix-Branch）"><a href="#4-修补分支（Hotfix-Branch）" class="headerlink" title="4. 修补分支（Hotfix Branch）"></a>4. 修补分支（Hotfix Branch）</h4><p>修补分支用于紧急修复生产环境中的 bug。通常从 <code>master</code> 分支创建。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并切换到一个新的修补分支</span></span><br><span class="line">git flow hotfix start hotfix-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修复完成后，合并修补分支到 master 和 develop 分支，打上标签并删除修补分支</span></span><br><span class="line">git flow hotfix finish hotfix-name</span><br></pre></td></tr></table></figure>
+
+<h3 id="GitFlow-命令总结"><a href="#GitFlow-命令总结" class="headerlink" title="GitFlow 命令总结"></a>GitFlow 命令总结</h3><ul>
+<li>初始化 GitFlow：<code>git flow init</code></li>
+<li>开始一个功能分支：<code>git flow feature start feature-name</code></li>
+<li>完成一个功能分支：<code>git flow feature finish feature-name</code></li>
+<li>开始一个发布分支：<code>git flow release start release-version</code></li>
+<li>完成一个发布分支：<code>git flow release finish release-version</code></li>
+<li>开始一个修补分支：<code>git flow hotfix start hotfix-name</code></li>
+<li>完成一个修补分支：<code>git flow hotfix finish hotfix-name</code></li>
+</ul>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>以下是一个使用 GitFlow 工作流的完整示例：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化 GitFlow</span></span><br><span class="line">git flow init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始一个新的功能分支</span></span><br><span class="line">git flow feature start new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在功能分支上进行开发</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Some feature code&quot;</span> &gt; feature.txt</span><br><span class="line">git add feature.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add new feature&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成功能分支，合并到 develop 分支</span></span><br><span class="line">git flow feature finish new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始一个新的发布分支</span></span><br><span class="line">git flow release start 1.0.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行一些发布前的修改</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Release notes&quot;</span> &gt; RELEASE_NOTES.txt</span><br><span class="line">git add RELEASE_NOTES.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add release notes&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成发布分支，合并到 master 和 develop 分支，并打上标签</span></span><br><span class="line">git flow release finish 1.0.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始一个新的修补分支</span></span><br><span class="line">git flow hotfix start hotfix-1.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修复一个紧急 bug</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Hotfix&quot;</span> &gt; hotfix.txt</span><br><span class="line">git add hotfix.txt</span><br><span class="line">git commit -m <span class="string">&quot;Fix critical bug&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 完成修补分支，合并到 master 和 develop 分支，并打上标签</span></span><br><span class="line">git flow hotfix finish hotfix-1.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>GitFlow 是一种强大的 Git 工作流模型，通过定义明确的分支模型和操作流程，简化了团队协作和项目管理。通过使用 GitFlow，你可以更好地组织代码，确保代码的稳定性和有序性。</p>
+<hr>
+<h2 id="GitHub-Flow"><a href="#GitHub-Flow" class="headerlink" title="GitHub Flow"></a>GitHub Flow</h2><p>GitHub Flow 是一种简单而有效的 Git 工作流，特别适用于持续部署和持续集成的环境。与 GitFlow 相比，GitHub Flow 更加轻量级，主要依赖于 <code>master</code> 分支和短生命周期的特性分支。以下是 GitHub Flow 的基本概念和操作指南：</p>
+<h3 id="GitHub-Flow-工作流概述"><a href="#GitHub-Flow-工作流概述" class="headerlink" title="GitHub Flow 工作流概述"></a>GitHub Flow 工作流概述</h3><ol>
+<li><strong><code>master</code> 分支</strong><ul>
+<li><code>master</code> 分支始终保持在可部署的状态。每次合并到 <code>master</code> 分支都应该是一个稳定的版本。</li>
+</ul>
+</li>
+<li><strong>特性分支（Feature Branch）</strong><ul>
+<li>从 <code>master</code> 分支创建，用于开发新功能或修复 bug。开发完成后，通过 Pull Request（PR）将特性分支合并回 <code>master</code> 分支。</li>
+</ul>
+</li>
+</ol>
+<h3 id="GitHub-Flow-工作流程"><a href="#GitHub-Flow-工作流程" class="headerlink" title="GitHub Flow 工作流程"></a>GitHub Flow 工作流程</h3><h4 id="1-创建特性分支"><a href="#1-创建特性分支" class="headerlink" title="1. 创建特性分支"></a>1. 创建特性分支</h4><p>从 <code>master</code> 分支创建一个新的特性分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature-branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-在特性分支上进行开发"><a href="#2-在特性分支上进行开发" class="headerlink" title="2. 在特性分支上进行开发"></a>2. 在特性分支上进行开发</h4><p>在特性分支上进行代码开发，提交更改：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进行一些修改</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Some changes&quot;</span> &gt; file.txt</span><br><span class="line">git add file.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add some changes&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-推送特性分支到远程仓库"><a href="#3-推送特性分支到远程仓库" class="headerlink" title="3. 推送特性分支到远程仓库"></a>3. 推送特性分支到远程仓库</h4><p>将本地特性分支推送到远程仓库：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin feature-branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-创建-Pull-Request"><a href="#4-创建-Pull-Request" class="headerlink" title="4. 创建 Pull Request"></a>4. 创建 Pull Request</h4><p>在 GitHub 上创建一个 Pull Request，请求将特性分支合并到 <code>master</code> 分支。Pull Request 应包括：</p>
+<ul>
+<li>开发完成的描述</li>
+<li>相关的测试结果</li>
+<li>代码审查者的评论</li>
+</ul>
+<h4 id="5-代码审查和合并"><a href="#5-代码审查和合并" class="headerlink" title="5. 代码审查和合并"></a>5. 代码审查和合并</h4><p>团队成员进行代码审查，通过后将特性分支合并到 <code>master</code> 分支：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge feature-branch</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-部署"><a href="#6-部署" class="headerlink" title="6. 部署"></a>6. 部署</h4><p>每次合并到 <code>master</code> 分支后，自动或手动将代码部署到生产环境。</p>
+<h3 id="使用示例-1"><a href="#使用示例-1" class="headerlink" title="使用示例"></a>使用示例</h3><p>以下是一个使用 GitHub Flow 工作流的完整示例：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从 master 分支创建一个新的特性分支</span></span><br><span class="line">git checkout -b new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在特性分支上进行开发</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Some new feature&quot;</span> &gt; feature.txt</span><br><span class="line">git add feature.txt</span><br><span class="line">git commit -m <span class="string">&quot;Add new feature&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 推送特性分支到远程仓库</span></span><br><span class="line">git push origin new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 Pull Request 并请求合并到 master 分支</span></span><br><span class="line"><span class="comment"># 在 GitHub 网站上进行此步骤</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 代码审查通过后，合并 Pull Request 并将特性分支合并到 master 分支</span></span><br><span class="line"><span class="comment"># 在 GitHub 网站上进行此步骤，或使用命令行</span></span><br><span class="line">git checkout master</span><br><span class="line">git pull origin master</span><br><span class="line">git merge new-feature</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除本地和远程的特性分支</span></span><br><span class="line">git branch -d new-feature</span><br><span class="line">git push origin --delete new-feature</span><br></pre></td></tr></table></figure>
+
+<h3 id="GitHub-Flow-的优点"><a href="#GitHub-Flow-的优点" class="headerlink" title="GitHub Flow 的优点"></a>GitHub Flow 的优点</h3><ol>
+<li><strong>简洁性</strong><ul>
+<li>GitHub Flow 非常简单，只使用 <code>master</code> 和特性分支，易于理解和操作。</li>
+</ul>
+</li>
+<li><strong>持续集成</strong><ul>
+<li>每次合并到 <code>master</code> 分支都可以触发持续集成和自动部署，确保代码的高质量和快速交付。</li>
+</ul>
+</li>
+<li><strong>代码审查</strong><ul>
+<li>通过 Pull Request 进行代码审查，确保代码质量和团队成员之间的协作。</li>
+</ul>
+</li>
+</ol>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><strong>保持 <code>master</code> 分支的稳定</strong><ul>
+<li><code>master</code> 分支始终应该保持可部署的状态。确保所有合并到 <code>master</code> 分支的代码都经过充分的测试和审查。</li>
+</ul>
+</li>
+<li><strong>频繁的小步提交</strong><ul>
+<li>尽量保持每次提交和合并的小步迭代，减少合并冲突和代码回归的风险。</li>
+</ul>
+</li>
+<li><strong>自动化测试和部署</strong><ul>
+<li>配置自动化测试和部署工具，如 GitHub Actions、Jenkins 等，每次合并到 <code>master</code> 分支后自动执行测试和部署。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>GitHub Flow 是一种简单而高效的 Git 工作流，特别适用于快速开发和持续集成的环境。通过合理使用特性分支和 Pull Request，团队可以保持高效协作和高质量的代码交付。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/12/Docker/" rel="prev" title="Docker">
+      <i class="fa fa-chevron-left"></i> Docker
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/12/Liunx%E5%91%BD%E4%BB%A4/" rel="next" title="Liunx命令">
+      Liunx命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-%E7%9A%84%E5%85%B3%E9%94%AE%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">Git 的关键特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-number">2.</span> <span class="nav-text">Git 的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F"><span class="nav-number">3.</span> <span class="nav-text">Git 的工作区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-%E7%9A%84%E6%96%87%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="nav-number">4.</span> <span class="nav-text">Git 的文件状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">Git 的基本使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AE%BE%E7%BD%AE-Git"><span class="nav-number">5.1.</span> <span class="nav-text">1. 设置 Git</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="nav-number">5.1.1.</span> <span class="nav-text">配置用户信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.2.</span> <span class="nav-text">检查配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E5%92%8C%E7%AE%A1%E7%90%86%E4%BB%93%E5%BA%93"><span class="nav-number">5.2.</span> <span class="nav-text">2. 创建和管理仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="nav-number">5.2.1.</span> <span class="nav-text">初始化仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E7%8E%B0%E6%9C%89%E4%BB%93%E5%BA%93"><span class="nav-number">5.2.2.</span> <span class="nav-text">克隆现有仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%B7%BB%E5%8A%A0%E5%92%8C%E6%8F%90%E4%BA%A4"><span class="nav-number">5.3.</span> <span class="nav-text">3. 添加和提交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="nav-number">5.3.1.</span> <span class="nav-text">添加文件到暂存区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%94%B9"><span class="nav-number">5.3.2.</span> <span class="nav-text">提交更改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%E6%88%96%E5%B7%AE%E5%BC%82"><span class="nav-number">5.4.</span> <span class="nav-text">4.查看状态或差异</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%BB%93%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">5.4.1.</span> <span class="nav-text">查看仓库状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="nav-number">5.4.2.</span> <span class="nav-text">查看提交历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E6%96%87%E4%BB%B6%E5%B7%AE%E5%BC%82"><span class="nav-number">5.4.3.</span> <span class="nav-text">比较文件差异</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">5.5.</span> <span class="nav-text">5. 分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF"><span class="nav-number">5.5.1.</span> <span class="nav-text">创建新分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="nav-number">5.5.2.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="nav-number">5.5.3.</span> <span class="nav-text">创建并切换分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="nav-number">5.5.4.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="nav-number">5.5.5.</span> <span class="nav-text">合并分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="nav-number">5.5.6.</span> <span class="nav-text">删除分支</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.6.</span> <span class="nav-text">6. 远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.6.1.</span> <span class="nav-text">添加远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.6.2.</span> <span class="nav-text">查看远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.6.3.</span> <span class="nav-text">删除远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.6.4.</span> <span class="nav-text">重命名远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E6%9B%B4%E6%94%B9%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.6.5.</span> <span class="nav-text">推送更改到远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E6%9B%B4%E6%94%B9"><span class="nav-number">5.6.6.</span> <span class="nav-text">拉取远程仓库的更改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E6%9B%B4%E6%94%B9%EF%BC%88%E4%B8%8D%E5%90%88%E5%B9%B6%EF%BC%89"><span class="nav-number">5.6.7.</span> <span class="nav-text">获取远程仓库的更改（不合并）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="nav-number">5.7.</span> <span class="nav-text">7. 标签管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE"><span class="nav-number">5.7.1.</span> <span class="nav-text">创建标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%A0%87%E7%AD%BE"><span class="nav-number">5.7.2.</span> <span class="nav-text">查看标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E6%A0%87%E7%AD%BE%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">5.7.3.</span> <span class="nav-text">推送标签到远程仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%92%A4%E9%94%80%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="nav-number">5.8.</span> <span class="nav-text">8. 撤销和恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%88%B0%E6%96%B0%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">5.8.1.</span> <span class="nav-text">移动一个文件到新的位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="nav-number">5.8.2.</span> <span class="nav-text">删除一个文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%88%B0%E4%B9%8B%E5%89%8D%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">5.8.3.</span> <span class="nav-text">恢复一个文件到之前的版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E6%8F%90%E4%BA%A4%EF%BC%8C%E7%94%A8%E6%9D%A5%E6%92%A4%E9%94%80%E6%8C%87%E5%AE%9A%E7%9A%84%E6%8F%90%E4%BA%A4"><span class="nav-number">5.8.4.</span> <span class="nav-text">创建一个新的提交，用来撤销指定的提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E9%87%8D%E7%BD%AE%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E7%9A%84-HEAD-%E5%88%B0%E6%8C%87%E5%AE%9A%E6%8F%90%E4%BA%A4%EF%BC%8C%E5%B9%B6%E6%A0%B9%E6%8D%AE%E9%9C%80%E8%A6%81%E6%9B%B4%E6%94%B9%E6%9A%82%E5%AD%98%E5%8C%BA%E5%92%8C%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E3%80%82"><span class="nav-number">5.8.5.</span> <span class="nav-text">用于重置当前分支的 HEAD 到指定提交，并根据需要更改暂存区和工作目录。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E6%9A%82%E5%AD%98%E5%8C%BA%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%8C%E9%87%8D%E6%96%B0%E6%94%BE%E5%9B%9E%E5%B7%A5%E4%BD%9C%E5%8C%BA"><span class="nav-number">5.8.6.</span> <span class="nav-text">撤销暂存区的文件，重新放回工作区</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">特殊文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-gitignore"><span class="nav-number">6.1.</span> <span class="nav-text">1. .gitignore</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">6.1.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gitattributes"><span class="nav-number">6.2.</span> <span class="nav-text">2. .gitattributes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gitkeep"><span class="nav-number">6.3.</span> <span class="nav-text">3. .gitkeep</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-2"><span class="nav-number">6.3.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-gitmodules"><span class="nav-number">6.4.</span> <span class="nav-text">4. .gitmodules</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-3"><span class="nav-number">6.4.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-git-config"><span class="nav-number">6.5.</span> <span class="nav-text">5. .git&#x2F;config</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-4"><span class="nav-number">6.5.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-mailmap"><span class="nav-number">6.6.</span> <span class="nav-text">6. .mailmap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-5"><span class="nav-number">6.6.1.</span> <span class="nav-text">示例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Git-Hook-%E6%96%87%E4%BB%B6"><span class="nav-number">6.7.</span> <span class="nav-text">7. Git Hook 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A-6"><span class="nav-number">6.7.1.</span> <span class="nav-text">示例：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="nav-number">7.</span> <span class="nav-text">Git的高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%9A%82%E5%AD%98%EF%BC%88Interactive-Staging%EF%BC%89"><span class="nav-number">7.1.</span> <span class="nav-text">1. 交互式暂存（Interactive Staging）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Rebase"><span class="nav-number">7.2.</span> <span class="nav-text">2. Rebase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Cherry-Pick"><span class="nav-number">7.3.</span> <span class="nav-text">3. Cherry-Pick</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Stash"><span class="nav-number">7.4.</span> <span class="nav-text">4. Stash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AD%90%E6%A8%A1%E5%9D%97%EF%BC%88Submodules%EF%BC%89"><span class="nav-number">7.5.</span> <span class="nav-text">5. 子模块（Submodules）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Subtree"><span class="nav-number">7.6.</span> <span class="nav-text">6. Subtree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2"><span class="nav-number">7.7.</span> <span class="nav-text">7. 重写历史</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4"><span class="nav-number">7.7.1.</span> <span class="nav-text">修改最近一次提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2"><span class="nav-number">7.7.2.</span> <span class="nav-text">交互式重写历史</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Bisect"><span class="nav-number">7.8.</span> <span class="nav-text">8. Bisect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Blame"><span class="nav-number">7.9.</span> <span class="nav-text">9. Blame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Hooks"><span class="nav-number">7.10.</span> <span class="nav-text">10. Hooks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Worktree"><span class="nav-number">7.11.</span> <span class="nav-text">11. Worktree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitFlow"><span class="nav-number">8.</span> <span class="nav-text">GitFlow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitFlow-%E5%88%86%E6%94%AF%E6%A8%A1%E5%9E%8B"><span class="nav-number">8.1.</span> <span class="nav-text">GitFlow 分支模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitFlow-%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">8.2.</span> <span class="nav-text">GitFlow 工作流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96-GitFlow"><span class="nav-number">8.2.1.</span> <span class="nav-text">1. 初始化 GitFlow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%8A%9F%E8%83%BD%E5%88%86%E6%94%AF%EF%BC%88Feature-Branch%EF%BC%89"><span class="nav-number">8.2.2.</span> <span class="nav-text">2. 功能分支（Feature Branch）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%8F%91%E5%B8%83%E5%88%86%E6%94%AF%EF%BC%88Release-Branch%EF%BC%89"><span class="nav-number">8.2.3.</span> <span class="nav-text">3. 发布分支（Release Branch）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BF%AE%E8%A1%A5%E5%88%86%E6%94%AF%EF%BC%88Hotfix-Branch%EF%BC%89"><span class="nav-number">8.2.4.</span> <span class="nav-text">4. 修补分支（Hotfix Branch）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitFlow-%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="nav-number">8.3.</span> <span class="nav-text">GitFlow 命令总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">8.4.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub-Flow"><span class="nav-number">9.</span> <span class="nav-text">GitHub Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Flow-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A6%82%E8%BF%B0"><span class="nav-number">9.1.</span> <span class="nav-text">GitHub Flow 工作流概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Flow-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">9.2.</span> <span class="nav-text">GitHub Flow 工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E7%89%B9%E6%80%A7%E5%88%86%E6%94%AF"><span class="nav-number">9.2.1.</span> <span class="nav-text">1. 创建特性分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8%E7%89%B9%E6%80%A7%E5%88%86%E6%94%AF%E4%B8%8A%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91"><span class="nav-number">9.2.2.</span> <span class="nav-text">2. 在特性分支上进行开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%8E%A8%E9%80%81%E7%89%B9%E6%80%A7%E5%88%86%E6%94%AF%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">9.2.3.</span> <span class="nav-text">3. 推送特性分支到远程仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%88%9B%E5%BB%BA-Pull-Request"><span class="nav-number">9.2.4.</span> <span class="nav-text">4. 创建 Pull Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5%E5%92%8C%E5%90%88%E5%B9%B6"><span class="nav-number">9.2.5.</span> <span class="nav-text">5. 代码审查和合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E9%83%A8%E7%BD%B2"><span class="nav-number">9.2.6.</span> <span class="nav-text">6. 部署</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-1"><span class="nav-number">9.3.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Flow-%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">9.4.</span> <span class="nav-text">GitHub Flow 的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">9.5.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">9.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Linlixia</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Linlixia</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

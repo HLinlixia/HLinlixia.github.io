@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hlinlixia.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Linux 提供了一个强大的命令行接口，可以用于执行各种任务，如文件管理、进程控制、系统监控等。以下是一些常用的 Linux 命令及其用途： 文件管理 列出目录内容  1ls   -l：长格式列出目录内容 -a：显示所有文件，包括隐藏文件 -r，–reverse：逆序排列目录内容   改变工作目录  1cd [directory]  显示当前目录路径  1pwd  创建目录  1mkdir [di">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liunx命令">
+<meta property="og:url" content="https://hlinlixia.github.io/2024/07/12/Liunx%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Linlixia的博客">
+<meta property="og:description" content="Linux 提供了一个强大的命令行接口，可以用于执行各种任务，如文件管理、进程控制、系统监控等。以下是一些常用的 Linux 命令及其用途： 文件管理 列出目录内容  1ls   -l：长格式列出目录内容 -a：显示所有文件，包括隐藏文件 -r，–reverse：逆序排列目录内容   改变工作目录  1cd [directory]  显示当前目录路径  1pwd  创建目录  1mkdir [di">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-12T11:57:07.000Z">
+<meta property="article:modified_time" content="2024-07-12T12:07:46.530Z">
+<meta property="article:author" content="Linlixia">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hlinlixia.github.io/2024/07/12/Liunx%E5%91%BD%E4%BB%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Liunx命令 | Linlixia的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Linlixia的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hlinlixia.github.io/2024/07/12/Liunx%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Linlixia">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Linlixia的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Liunx命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-12 19:57:07 / 修改时间：20:07:46" itemprop="dateCreated datePublished" datetime="2024-07-12T19:57:07+08:00">2024-07-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Linux 提供了一个强大的命令行接口，可以用于执行各种任务，如文件管理、进程控制、系统监控等。以下是一些常用的 Linux 命令及其用途：</p>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><ol>
+<li><p><strong>列出目录内容</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-l：长格式列出目录内容</li>
+<li>-a：显示所有文件，包括隐藏文件</li>
+<li>-r，–reverse：逆序排列目录内容</li>
+</ul>
+</li>
+<li><p><strong>改变工作目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> [directory]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示当前目录路径</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> [directory]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-p，–parents：如果目录已存在，不报错，且按需创建父目录</li>
+</ul>
+</li>
+<li><p><strong>删除文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> [file]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-R，-r，–recursive：递归地删除目录及他们内容</li>
+<li>-f，–force：强制删除，忽略不存在的文件和参数，不提示</li>
+</ul>
+</li>
+<li><p><strong>复制文件或目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> [<span class="built_in">source</span>] [destination]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-R，-r，–recursive：递归地复制文件</li>
+<li>-f，–force：如果有一个已存在且无法打开的目标文件，将其删除并重试</li>
+</ul>
+</li>
+<li><p><strong>移动或重命名文件或目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> [<span class="built_in">source</span>] [destination]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-f，–force：覆盖前不提示</li>
+</ul>
+</li>
+<li><p><strong>改变文件时间戳</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> [params] [file]</span><br></pre></td></tr></table></figure>
+
+<p> 将文件的访问时间和修改时间更新为当前时间，除非提供 -c 或 -h 参数，否则程序会在文件不存在时创建一个空文件</p>
+</li>
+</ol>
+<h2 id="文本操作"><a href="#文本操作" class="headerlink" title="文本操作"></a>文本操作</h2><ol>
+<li><p><strong>连接文件并在标准输出上输出</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> [params] filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>类似于 cat ，用于分页阅览文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>more 的增强版，支持翻页和搜索</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less filename</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看文件的开头部分</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">head</span> [params] [file]</span><br></pre></td></tr></table></figure>
+
+<p> 将文件列表中的每个文件的起始10行内容输出至标准输出</p>
+</li>
+<li><p><strong>查看文件的结尾部分</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> [params] [file]z</span><br></pre></td></tr></table></figure>
+
+<p> 在标准输出上显示每个文件的最后10行。</p>
+<ul>
+<li>-f，–follow：当文件增长时，输出后续添加的数据</li>
+</ul>
+</li>
+</ol>
+<h2 id="检索和查找"><a href="#检索和查找" class="headerlink" title="检索和查找"></a>检索和查找</h2><ol>
+<li><p><strong>在指定目录下查找文件和目录</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find [路径] [匹配条件] [动作]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-name pattern：按照文件名查找，支持使用通配符*和？</li>
+<li>-type type：按照文件类型查找，可以是f（文件），d（目录），l（符号链接）等</li>
+<li>-size [+-]size：按照文件大小查找，+&#x2F;-表示大于或者小于指定大小，单位可以是c（字节），w（字数），d（块数），k（KB），M（MB），G（GB）</li>
+<li>-mtime days：按修改时间查找，+&#x2F;-表示在指定天数前&#x2F;后，days表示天数</li>
+</ul>
+</li>
+<li><p><strong>查找文件中符合条件的内容</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [params] pattern [files]</span><br></pre></td></tr></table></figure>
+
+<p> 在文件 [files] 范围内查找满足条件 pattern 的内容</p>
+<ul>
+<li>-i：忽略大小写</li>
+<li>-n：显示匹配内容的行号</li>
+<li>-r：递归查找子目录中的文件</li>
+</ul>
+</li>
+<li><p><strong>参数传递过滤器，命令组合工具</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xargs</span><br></pre></td></tr></table></figure>
+
+<p> 给命令传递参数，常用来组合多个命令</p>
+</li>
+<li><p><strong>查找文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> [file...]</span><br></pre></td></tr></table></figure>
+
+<p> 在环境变量 $PATH 设置的目录里查找符合条件的文件</p>
+</li>
+<li><p><strong>查找文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis [params] [file...]</span><br></pre></td></tr></table></figure>
+
+<p> 用于查找源码，二进制文件或者帮助文件</p>
+<ul>
+<li>-B：查找二进制文件</li>
+<li>-S：查找源码文件</li>
+<li>-M：查找说明文件</li>
+</ul>
+</li>
+</ol>
+<h2 id="用户和权限"><a href="#用户和权限" class="headerlink" title="用户和权限"></a>用户和权限</h2><ol>
+<li><p><strong>创建用户账户</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd [params] username</span><br></pre></td></tr></table></figure>
+
+<p> 用于创建用户，一般使用useradd创建好用户之后，再用passwd设定账户的密码</p>
+</li>
+<li><p><strong>创建或修改密码</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd [username]</span><br></pre></td></tr></table></figure>
+
+<p> 用来设置或更改用户的密码，不输入username则为修改当前用户的密码</p>
+</li>
+<li><p><strong>删除用户账户</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel -r [username]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-r：删除用户目录及其中的所有文件</li>
+</ul>
+</li>
+<li><p><strong>创建用户组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd [params] [group]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除用户组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel [group]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示自身用户名称</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">whoami</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改文件权限</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> mode file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改文件的所有者和关联组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [params] user[:group] file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改文件的所属群组</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chgrp</span> [params] group file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>以管理者的身份执行命令</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">command</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="压缩和解压缩"><a href="#压缩和解压缩" class="headerlink" title="压缩和解压缩"></a>压缩和解压缩</h2><ol>
+<li><p><strong>压缩文件为 tar.gz</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czvf [archive.tar.gz] [directory]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>压缩&#x2F;解压 tar.gz 文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip [params] [<span class="built_in">dir</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解压 tar.gz 文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip [params] file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>压缩文件为 zip</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip [params] file.zip [file...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解压 zip 文件</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip [params] file.zip</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><ol>
+<li><p><strong>查看进程状态</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps [params]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-ef：显示所有进程信息</li>
+</ul>
+</li>
+<li><p><strong>杀死进程</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> [-s SIGNAL] / [PID]</span><br><span class="line"><span class="comment"># 杀死PID为 20000 的进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 20000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示目录或文件大小</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> [params] [<span class="built_in">dir</span>/file]</span><br><span class="line"><span class="comment"># 以方便阅读的方式显示当前目录下的所有文件或目录的大小</span></span><br><span class="line"><span class="built_in">du</span> -sh *</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示磁盘空间大小</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> [params] [file]</span><br><span class="line"><span class="comment"># 以方便阅读的方式显示当前磁盘空间大小</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示内存空余状态</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">free [params] [-s seconds]</span><br><span class="line"><span class="comment"># 每隔10秒以G为单位显示内存使用状况</span></span><br><span class="line">free -g -s 10</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示系统的整体性能信息以及正在运行的进程信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top [params]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置命令的别名</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> [别名]=[commands]</span><br><span class="line"><span class="comment"># 设置ls启动颜色输出</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&#x27;ls --color=auto&#x27;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示当前日期和时间</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">date</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示系统的硬件和操作系统信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示系统运行时间和负载</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uptime</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h2><ol>
+<li><p><strong>显示或配置网络接口</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示网络连接、路由表、接口统计等</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示网络接口和路由信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>测试网络连接</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping &lt;host&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>显示 DNS 信息</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup &lt;host&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="软件管理"><a href="#软件管理" class="headerlink" title="软件管理"></a>软件管理</h2><ol>
+<li><p><strong>更新包索引</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>升级已安装的软件包</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get upgrade</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装新软件包</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install &lt;package&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除软件包</strong></p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get remove &lt;package&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="vim-vi操作"><a href="#vim-vi操作" class="headerlink" title="vim&#x2F;vi操作"></a>vim&#x2F;vi操作</h2><h4 id="正常模式"><a href="#正常模式" class="headerlink" title="正常模式"></a>正常模式</h4><ul>
+<li><code>h</code>：光标左移。</li>
+<li><code>j</code>：光标下移。</li>
+<li><code>k</code>：光标上移。</li>
+<li><code>l</code>：光标右移。</li>
+<li><code>w</code>：移动到下一个单词开头。</li>
+<li><code>b</code>：移动到前一个单词开头。</li>
+<li><code>0</code>：移动到行首。</li>
+<li><code>$</code>：移动到行尾。</li>
+<li><code>gg</code>：移动到文件开头。</li>
+<li><code>G</code>：移动到文件结尾。</li>
+<li><code>:n</code>：移动到第n行。</li>
+<li><code>u</code>：撤销。</li>
+<li><code>Ctrl + r</code>：重做。</li>
+</ul>
+<h4 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h4><ul>
+<li><code>i</code>：在光标前插入。</li>
+<li><code>I</code>：在行首插入。</li>
+<li><code>a</code>：在光标后插入。</li>
+<li><code>A</code>：在行尾插入。</li>
+<li><code>o</code>：在当前行下插入新行。</li>
+<li><code>O</code>：在当前行上插入新行。</li>
+<li><code>Esc</code>：返回Normal模式。</li>
+</ul>
+<h4 id="可视模式"><a href="#可视模式" class="headerlink" title="可视模式"></a>可视模式</h4><ul>
+<li><code>v</code>：进入可视模式。</li>
+<li><code>V</code>：进入行可视模式。</li>
+<li><code>Ctrl + v</code>：进入块可视模式。</li>
+<li><code>y</code>：复制选中区域。</li>
+<li><code>d</code>：删除选中区域。</li>
+<li><code>c</code>：更改选中区域。</li>
+</ul>
+<h4 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h4><ul>
+<li><code>:w</code>：保存文件。</li>
+<li><code>:q</code>：退出。</li>
+<li><code>:q!</code>：强制退出不保存。</li>
+<li><code>:wq</code>或<code>:x</code>：保存并退出。</li>
+<li><code>:e filename</code>：打开文件。</li>
+<li><code>:w filename</code>：另存为指定文件。</li>
+<li><code>:set number</code>：显示行号。</li>
+<li><code>:set nonumber</code>：隐藏行号。</li>
+<li><code>:syntax on</code>：开启语法高亮。</li>
+<li><code>:syntax off</code>：关闭语法高亮。</li>
+</ul>
+<h4 id="删除、复制、粘贴"><a href="#删除、复制、粘贴" class="headerlink" title="删除、复制、粘贴"></a>删除、复制、粘贴</h4><ul>
+<li><code>x</code>：删除光标处字符。</li>
+<li><code>dd</code>：删除整行。</li>
+<li><code>ndd</code>：删除游标所在的下面n行</li>
+<li><code>yy</code>：复制整行。</li>
+<li><code>nyy</code>：复制游标所在的下面n行</li>
+<li><code>p</code>：在光标后粘贴。</li>
+<li><code>P</code>：在光标前粘贴。</li>
+</ul>
+<h4 id="搜索与替换"><a href="#搜索与替换" class="headerlink" title="搜索与替换"></a>搜索与替换</h4><ul>
+<li><code>/pattern</code>：向前搜索模式。</li>
+<li><code>?pattern</code>：向后搜索模式。</li>
+<li><code>n</code>：跳到下一个匹配。</li>
+<li><code>N</code>：跳到上一个匹配。</li>
+<li><code>:%s/old/new/g</code>：全文件替换。</li>
+<li><code>:s/old/new/g</code>：当前行替换。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/12/Git/" rel="prev" title="Git">
+      <i class="fa fa-chevron-left"></i> Git
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/12/MySQL%E8%AF%AD%E6%B3%95/" rel="next" title="MySQL语法">
+      MySQL语法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">文件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">文本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E7%B4%A2%E5%92%8C%E6%9F%A5%E6%89%BE"><span class="nav-number">3.</span> <span class="nav-text">检索和查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90"><span class="nav-number">4.</span> <span class="nav-text">用户和权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E5%92%8C%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">5.</span> <span class="nav-text">压缩和解压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">系统管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">网络命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">8.</span> <span class="nav-text">软件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim-vi%E6%93%8D%E4%BD%9C"><span class="nav-number">9.</span> <span class="nav-text">vim&#x2F;vi操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%B8%B8%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.0.1.</span> <span class="nav-text">正常模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.0.2.</span> <span class="nav-text">插入模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.0.3.</span> <span class="nav-text">可视模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">9.0.4.</span> <span class="nav-text">命令行模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E3%80%81%E5%A4%8D%E5%88%B6%E3%80%81%E7%B2%98%E8%B4%B4"><span class="nav-number">9.0.5.</span> <span class="nav-text">删除、复制、粘贴</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E4%B8%8E%E6%9B%BF%E6%8D%A2"><span class="nav-number">9.0.6.</span> <span class="nav-text">搜索与替换</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Linlixia</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Linlixia</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
